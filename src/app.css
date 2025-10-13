@@ -133,19 +133,41 @@
   --color-default: #CFCFCF;
   --color-bright: #FFFFFF;
   --color-light: #E0E0E0;
+  --color-border-default: #535554;
+  --color-button-default: #282b2a;
+  --color-button-border: #535554;
+  --color-secondary-button: #336e41; 
+  --color-secondary-button-border: #699276;
+  --color-sidebar-menu: #191a1b;
   --font-satoshi: "Satoshi", sans-serif;
   --font-satoshi-bold: "Satoshi-Bold", sans-serif;
 }
 
 /**
-* Styles that should be applied regardless
+* Styles that should be applied regardless to html and body elements
+* + Removing default padding and margins
 */
 @layer base {
   html, body {
     @apply min-h-screen text-default;
     margin: 0;
     padding: 0;
-    background: radial-gradient(circle at 20% 20%, #1a103d 0%, #0B0B0F 80%);
+    background: #1c1f1e;
+  }
+}
+
+/**
+* Create artificial delay
+*/
+@keyframes sheen {
+  0% { transform: translateX(100%); }
+  60% { transform: translateX(300%); }
+  100% { transform: translateX(-200%); }
+}
+
+@layer utilities {
+  .animate-sheen {
+    animation: sheen 5s linear infinite;
   }
 }
 
@@ -169,6 +191,9 @@
   @apply left-0 w-full;
 }
 
+/**
+* Tailwind does not have anything for these CSS properties so I just made one 
+*/
 .vertical-writing {
   writing-mode: vertical-rl;
   text-orientation: mixed;

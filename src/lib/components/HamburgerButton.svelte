@@ -8,7 +8,7 @@
 <button
 	{onclick}
 	aria-label="hamburger menu"
-	class="relative hover:cursor-pointer text-white w-8 h-8 flex items-center justify-center transition-all duration-300"
+	class="relative hover:cursor-pointer w-7 h-7 flex items-center justify-center transition-all duration-300"
 >
 	<svg
 		class="w-6 h-6 transition-transform duration-500"
