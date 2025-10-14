@@ -172,6 +172,20 @@
 }
 
 /**
+* Staggered animations keyframes
+*/
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+ }
+  to {
+    transform: translateY(0);
+    opacitiy:1
+  }
+}
+
+/**
 * Nav-bar link animations
 */
 .nav-link {

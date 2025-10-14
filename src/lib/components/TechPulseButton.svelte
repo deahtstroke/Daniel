@@ -7,7 +7,7 @@
 <div class="flex flex-row">
 	<button
 		aria-label="{label} button"
-		class="relative overflow-hidden px-2 py-1 rounded-sm border-1 border-[secondary-button-border] bg-[#336e41] text-[white]"
+		class="relative overflow-hidden px-2 py-1 rounded-sm border-1 border-[secondary-button-border] bg-[#336e41] text-bright hover:cursor-pointer"
 	>
 		<span class="relative z-10">{label}</span>
 		<span class="absolute inset-0 border animate-pulse blur-md"></span>

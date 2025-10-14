@@ -1,24 +1,34 @@
 <script lang="ts">
 	import HamburgerButton from "./HamburgerButton.svelte";
 	import Sidebar from "./Sidebar.svelte";
+	import { User, Briefcase, Mail, Github } from "lucide-svelte";
+
 	import type { MenuOption } from "$lib/types/MenuOption";
 
 	let menuOptions: MenuOption[] = [
 		{
 			name: "About",
+			desc: "Learn more",
 			ref: "/",
+			icon: User,
 		},
 		{
 			name: "Projects",
+			desc: "View work",
 			ref: "#projects",
+			icon: Briefcase,
 		},
 		{
 			name: "Contact",
+			desc: "Get in touch",
 			ref: "Contact",
+			icon: Mail,
 		},
 		{
 			name: "Source",
+			desc: "View code",
 			ref: "#source",
+			icon: Github,
 		},
 	];
 
@@ -30,10 +40,10 @@
 </script>
 
 <nav
-	class="relative h-12 max-w-2xl p-8 mx-auto flex flex-row items-center backdrop-blur-md z-49"
+	class="sticky top-0 h-12 max-w-2xl p-8 mx-auto flex flex-row items-center backdrop-blur-md z-50"
 >
 	<a
-		class="font-[Satoshi-Bold] mr-auto tracking-wide text-bright text-md hover:cursor-pointer selection:"
+		class="font-[Satoshi-Bold] mr-auto tracking-wide text-bright text-md hover:cursor-pointer"
 		href="/"
 	>
 		<h1>Daniel Villavicencio</h1>
