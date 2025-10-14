@@ -61,7 +61,7 @@
 			<div class="flex flex-col gap-4 text-sm">
 				<div class="flex flex-col gap-1 sm:hidden">
 					<h2 class="text-sm">About Me</h2>
-					<hr class="opacity-50" />
+					<hr class="opacity-25" />
 				</div>
 				<p>
 					I’m a freelance software engineer based in Roseville with a deep

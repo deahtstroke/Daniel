@@ -15,7 +15,7 @@
 		{
 			name: "Projects",
 			desc: "View work",
-			ref: "#projects",
+			ref: "/projects",
 			icon: Briefcase,
 		},
 		{

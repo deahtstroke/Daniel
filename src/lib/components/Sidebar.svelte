@@ -28,16 +28,16 @@
 		>
 			<button
 				{onclick}
-				class="w-8 h-8 flex items-center justify-center text-white/40
-				hover:text-white/90 focus:text-white/90 transition-colors duration-150 focus:outline none group hover:cursor-pointer"
+				class="w-8 h-8 flex items-center justify-center text-default
+				hover:text-bright focus:text-bright transition-colors duration-150
+				focus:outline group hover:cursor-pointer"
 				aria-label="Close menu"
 			>
 				<X
 					class="w-4 h-4 group-hover:rotate-90 transition-transform duration-200"
 				/>
 			</button>
-			<span
-				class="text-bright font-[Satoshi-Regular] tracking-[0.2em] uppercase"
+			<span class="text-bright font-[Satoshi-Regular] tracking-[0.2em]"
 				>Where to?
 			</span>
 		</div>
@@ -45,26 +45,31 @@
 		<!-- Side bar items -->
 		<ul
 			class="flex flex-1 px-4 py-8 flex-col gap-4 items-end justify-start"
-			transition:fadeFlyBlur={{ delay: 190, duration: 500, y: 50 }}
+			transition:fadeFlyBlur={{ delay: 25, duration: 200, y: 50 }}
 		>
 			{#each options as option, i (option)}
 				<li
 					class="menu-item px-4 py-2"
 					class:animate-in={open}
-					style="--delay: {i * 100}ms"
+					style="--delay: {i * 50}ms"
 				>
 					<a
 						href={option.ref}
-						class="group block px-3 py-2 text-default hover:text-bright focus:text-bright transition-all duration-150 relative"
+						{onclick}
+						class="group block px-3 py-2 text-default
+						hover:text-bright focus:text-bright
+						transition-all duration-150 relative"
 					>
 						<div
 							class="absolute
-						top-0 right-0 bottom-0 w-0.5 bg-white/80 scale-y-0
+						top-0 right-0 bottom-0 w-0.5 bg-bright scale-y-0
 						group-hover:scale-y-100 group-focus:scale-y-100 transition-transform duration-300
 						origin-center"
 						></div>
 						<div
-							class="relative flex justify-center items-center gap-3 transform group-hover:translate-x-[-4px] group-focus:translate-x-[-4px] transition-transform duration-150"
+							class="relative flex justify-center items-center gap-3
+							transform transition-transform duration-150
+							group-hover:translate-x-[-4px] group-focus:translate-x-[-4px]"
 						>
 							<div class="flex flex-col gap-0.5 text-right">
 								<span class="font-[Satoshi-Regular] text-sm">{option.name}</span
