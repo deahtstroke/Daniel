@@ -8,10 +8,11 @@
 </script>
 
 <article
-	class="group relative bg-bg-card border border-border-medium
+	class="group flex flex-col relative bg-bg-card border border-border-medium
 	hover:border-border-default transition-all duration-300 overflow-hidden"
 >
-	<div class="relative h-48 overflow-hiden bg-dark">
+	<!-- Image header -->
+	<div class="relative h-48 overflow-hidden bg-dark">
 		<img
 			src={project.image}
 			alt={project.title}
@@ -21,49 +22,50 @@
 			class="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent"
 		></div>
 	</div>
-	<div class="p-6 space-y-4">
-		<h3
-			class="text-xl font-[Satoshi-Light] tracking-wider text-light uppercase"
-		>
+
+	<!-- Main content -->
+	<div class="flex flex-1 flex-col p-6 gap-4">
+		<h3 class="text-xl font-[Satoshi-Bold]">
 			{project.title}
 		</h3>
-		Description
+		<h4 class="font-[Satoshi-Regular] font-light">Description</h4>
 		<p class="text-sm text-default leading-relaxed font-[Satoshi-Light]">
 			{project.description}
 		</p>
 
-		Tech Stack
+		<h4 class="font-[Satoshi-Regular] font-light">Tech Stack</h4>
 		<div class="flex flex-wrap gap-2">
 			{#each project.technologies as tech}
 				<span
-					class="px-2 py-1 text-[10px] uppercase tracking-wider bg-neutral-800/50 border border-border-default text-white/70 font-light"
+					class="px-2 py-1 text-[10px] uppercase tracking-wider bg-bg-dark border border-border-default font-light"
 				>
 					{tech}
 				</span>
 			{/each}
 		</div>
+	</div>
 
-		<div class="flex gap-3 pt-2">
+	<!-- Github and project links -->
+	<div class="flex gap-3 p-6">
+		<a
+			href={project.githubUrl}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default text-default hover:text-light hover:border-light transition-all duration-500 group/link"
+		>
+			<Github class="w-4 h-4" />
+			<span>Source</span>
+		</a>
+		{#if project.websiteUrl}
 			<a
-				href={project.githubUrl}
+				href={project.websiteUrl}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default text-default hover:text-light hover:border-light transition-all duration-500 group/link"
 			>
-				<Github class="w-4 h-4" />
-				<span>Source</span>
+				<ExternalLinkIcon class="w-4 h-4" />
+				<span>Visit</span>
 			</a>
-			{#if project.websiteUrl}
-				<a
-					href={project.websiteUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default text-default hover:text-light hover:border-light transition-all duration-500 group/link"
-				>
-					<ExternalLinkIcon class="w-4 h-4" />
-					<span>Visit</span>
-				</a>
-			{/if}
-		</div>
+		{/if}
 	</div>
 </article>
