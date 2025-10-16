@@ -28,16 +28,16 @@
 		<h3 class="text-xl font-[Satoshi-Bold]">
 			{project.title}
 		</h3>
-		<h4 class="font-[Satoshi-Regular] font-light">Description</h4>
-		<p class="text-sm text-default leading-relaxed font-[Satoshi-Light]">
+		<h4 class="text-light">Description</h4>
+		<p class="text-xs text-default leading-relaxed">
 			{project.description}
 		</p>
 
-		<h4 class="font-[Satoshi-Regular] font-light">Tech Stack</h4>
+		<h4 class="text-light">Tech Stack</h4>
 		<div class="flex flex-wrap gap-2">
 			{#each project.technologies as tech}
 				<span
-					class="px-2 py-1 text-[10px] uppercase tracking-wider bg-bg-dark border border-border-default font-light"
+					class="font-[Satoshi-Light] px-2 py-1 text-[10px] uppercase tracking-wider bg-bg-dark border border-border-default"
 				>
 					{tech}
 				</span>

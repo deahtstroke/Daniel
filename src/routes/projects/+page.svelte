@@ -47,11 +47,10 @@
 <section
 	class="flex flex-col px-8 py-4 mx-auto align-middle items-center max-w-4xl gap-8"
 >
-	<h2
-		class="text-2xl font-[Satoshi-Light] tracking-wider text-default uppercase"
-	>
-		Projects
-	</h2>
+	<div class="flex flex-col gap-1 w-full">
+		<h2 class="text-lg font-[Satoshi-Bold]">Projects</h2>
+		<hr class="opacity-50" />
+	</div>
 	<div class="grid items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 		{#each projects as project}
 			<ProjectCard {project} />

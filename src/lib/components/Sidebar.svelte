@@ -37,9 +37,7 @@
 					class="w-4 h-4 group-hover:rotate-90 transition-transform duration-200"
 				/>
 			</button>
-			<span class="text-bright font-[Satoshi-Regular] tracking-[0.2em]"
-				>Where to?
-			</span>
+			<span class="text-default">Where to? </span>
 		</div>
 
 		<!-- Side bar items -->
@@ -72,10 +70,8 @@
 							group-hover:translate-x-[-4px] group-focus:translate-x-[-4px]"
 						>
 							<div class="flex flex-col gap-0.5 text-right">
-								<span class="font-[Satoshi-Regular] text-sm">{option.name}</span
-								>
-								<span
-									class="text-[10px] text-default font-[Satoshi-Light] tracking-wide normal-case"
+								<span class="text-sm">{option.name}</span>
+								<span class="text-xs text-default normal-case"
 									>{option.desc}</span
 								>
 							</div>

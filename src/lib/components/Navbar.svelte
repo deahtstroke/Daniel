@@ -1,15 +1,21 @@
 <script lang="ts">
 	import HamburgerButton from "./HamburgerButton.svelte";
 	import Sidebar from "./Sidebar.svelte";
-	import { User, Briefcase, Mail, Github } from "lucide-svelte";
+	import { User, Briefcase, Mail, Github, Home } from "lucide-svelte";
 
 	import type { MenuOption } from "$lib/types/MenuOption";
 
 	let menuOptions: MenuOption[] = [
 		{
+			name: "Home",
+			desc: "Go back home",
+			ref: "/",
+			icon: Home,
+		},
+		{
 			name: "About",
 			desc: "Learn more",
-			ref: "/",
+			ref: "/about",
 			icon: User,
 		},
 		{
@@ -40,17 +46,19 @@
 </script>
 
 <nav
-	class="sticky top-0 h-12 max-w-2xl p-8 mx-auto flex flex-row items-center backdrop-blur-md z-50"
+	class="sticky top-0 h-12 max-w-2xl p-8 mx-auto flex flex-row items-center backdrop-blur-md z-50 border-b border-border-default"
 >
 	<a
-		class="font-[Satoshi-Bold] mr-auto tracking-wide text-bright text-md hover:cursor-pointer"
+		class="font-bold mr-auto tracking-wide text-bright text-md hover:cursor-pointer"
 		href="/"
 	>
 		<h1>Daniel Villavicencio</h1>
 	</a>
 
 	<!-- NavBar options desktop -->
-	<ul class="flex flex-row gap-4 mx-2 justify-center content-center">
+	<ul
+		class="flex flex-row gap-4 text-bright mx-2 justify-center content-center"
+	>
 		{#each menuOptions as option}
 			<li class="nav-link"><a href={option.ref}>{option.name}</a></li>
 		{/each}

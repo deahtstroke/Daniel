@@ -152,7 +152,7 @@
 * Nav-bar link animations
 */
 .nav-link {
-  @apply relative hidden sm:inline-block cursor-pointer text-default content-center;
+  @apply relative hidden sm:inline-block cursor-pointer content-center;
 }
 
 .nav-link:hover {
