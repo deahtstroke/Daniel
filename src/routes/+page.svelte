@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fadeFly } from "$lib/transitions/transitions";
 	import { FolderDotIcon, Mail, ArrowRight } from "lucide-svelte";
 	import gsmt from "$lib/assets/gsmt.png";
 	import protheon from "$lib/assets/Protheon.png";
@@ -7,6 +8,15 @@
 	import ProjectCard from "$lib/components/ProjectCard.svelte";
 	import type { Project } from "$lib/types/Project";
 	import type { CoreTechnologies } from "$lib/types/CoreTechnologies";
+	import { onMount } from "svelte";
+
+	let count: number = 0;
+	let staggerFunc = (reset: boolean): number => {
+		if (reset) {
+			count = 0;
+		}
+		return count++ * 50;
+	};
 
 	const coreTechnologies: CoreTechnologies[] = [
 		{
@@ -56,79 +66,98 @@
 			githubUrl: "http://www.github.com/deahtstroke/dap-profiler.nvim",
 		},
 	];
-
-	let staggerCounter: number = 0;
 </script>
 
 <main class="flex flex-col items-center gap-5 align-middle">
+	<!-- Hero banner -->
 	<section
-		class="relative w-full p-8 gap-4 flex flex-col items-center justify-center bg-linear-to-r from-purple-500 to-pink-500"
+		class="relative w-full p-8 bg-linear-to-r from-purple-500 to-pink-500"
 	>
-		<!-- Hero banner -->
-		<h1
-			class="fly-in-item animate-in font-[Satoshi-Bold] text-center text-bright text-5xl"
-			style="--delay: {staggerCounter++ * 50}ms"
+		<div
+			class="gap-4 max-w-3xl m-auto flex flex-col items-center justify-center"
 		>
-			Hello there, I'm Daniel
-		</h1>
-		<h3
-			class="fly-in-item animate-in text-center text-bright text-md"
-			style="--delay: {staggerCounter++ * 100}ms"
-		>
-			Building Scalable Distributed Backend Systems
-		</h3>
-		<p
-			class="fly-in-item animate-in text-bright text-sm text-center"
-			style="--delay: {staggerCounter++ * 100}ms"
-		>
-			I'm a Full-Stack Software Engineer that specializes in building
-			distributed systems and building DevOps deployment pipelines.
-		</p>
+			<h1
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
+				class="font-[Satoshi-Bold] text-center text-bright text-5xl"
+			>
+				Hello there, I'm Daniel
+			</h1>
+			<h2
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
+				class="text-center text-bright text-md"
+			>
+				Building Scalable Distributed Backend Systems
+			</h2>
+			<p
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
+				class="text-bright text-sm text-center"
+			>
+				I'm a Full-Stack Software Engineer that specializes in building
+				distributed systems and building DevOps deployment pipelines.
+			</p>
 
-		<!-- Action buttons -->
-		<div class="flex gap-3 justify-center pt-4 pb-2">
-			<button
-				aria-label="Connect button"
-				style="--delay: {staggerCounter++ * 100}ms"
-				class="fly-in-item animate-in
-				group
-				flex gap-2 px-2 py-1 border items-center rounded-sm text-bright border-bright sm:text-default sm:border-default
+			<!-- Action buttons -->
+			<div class="flex gap-3 justify-center pt-4 pb-2">
+				<button
+					in:fadeFly|global={{
+						delay: staggerFunc(false),
+						duration: 300,
+						y: 20,
+					}}
+					aria-label="Connect button"
+					class="group
+				flex gap-2 px-2 py-1 border items-center rounded-sm text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
-			>
-				<span class="text-sm">Connect</span>
-				<Mail class="w-4 h-4" />
-			</button>
-			<button
-				aria-label="Portfolio button"
-				style="--delay: {staggerCounter++ * 100}ms"
-				class="fly-in-item animate-in
-				flex px-2 py-1 gap-2 border items-center rounded-sm text-bright border-bright sm:text-default sm:border-default
+				>
+					<span class="text-sm">Connect</span>
+					<Mail class="w-4 h-4" />
+				</button>
+				<button
+					aria-label="Portfolio button"
+					in:fadeFly|global={{
+						delay: staggerFunc(false),
+						duration: 300,
+						y: 20,
+					}}
+					class="
+				flex px-2 py-1 gap-2 border items-center rounded-sm text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
-			>
-				<span class="text-sm">View Projects</span>
-				<FolderDotIcon class="w-4 h-4" />
-			</button>
+				>
+					<span class="text-sm">View Projects</span>
+					<FolderDotIcon class="w-4 h-4" />
+				</button>
+			</div>
 		</div>
 	</section>
 
 	<!-- Core Technologies -->
-	<section class="relative w-full px-8 py-4 flex flex-col gap-4">
-		<h1
-			class="animate-in fly-in-item text-xl text-bright text-center underline"
-			style="--delay: {staggerCounter++ * 100}ms"
+	<section class="relative max-w-4xl px-8 py-4 flex flex-col gap-4">
+		<h2
+			in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
+			class="text-2xl text-default text-center font-semibold"
 		>
 			Core Technologies
-		</h1>
+		</h2>
 		{#each coreTechnologies as tech}
-			<h2 class="fly-right-item animate-right text-sm text-bright text-start">
+			<h3
+				in:fadeFly|global={{ delay: staggerFunc(true), duration: 150, x: 20 }}
+				class="font-semibold text-lg text-default text-start md:text-center"
+			>
 				{tech.category}
-			</h2>
-			<div class="flex flex-row flex-wrap gap-2">
+			</h3>
+			<div
+				class="flex flex-row flex-wrap justify-start md:justify-center gap-2"
+			>
 				{#each tech.technologies as elem}
 					<div
-						class="fly-right-item animate-right relative py-1 px-2 bg-bg-dark border border-border-default uppercase text-xs hover:bg-bg-default"
+						in:fadeFly|global={{
+							delay: staggerFunc(false),
+							duration: 200,
+							x: 20,
+						}}
+						class="relative py-1 px-2 bg-bg-dark border border-border-default uppercase text-xs hover:bg-bg-default"
 					>
-						#{elem}
+						{elem}
 					</div>
 				{/each}
 			</div>
@@ -137,13 +166,14 @@
 
 	<!-- Featured Projects -->
 	<section
-		style="--delay: {staggerCounter++ * 100}ms"
-		class="fly-in-item animate-in relative w-full px-8 py-4 flex flex-col items-center gap-4"
+		in:fadeFly={{ delay: staggerFunc(true), duration: 300 }}
+		class="relative max-w-6xl px-8 py-4 flex flex-col items-center gap-4"
 	>
-		<h1 class="text-xl text-bright text-center underline">Featured Projects</h1>
-		<p class="text-md text-center">
-			These projects are on-going projects and actively maintained that I have
-			been working on.
+		<h2 class="text-2xl text-bright text-center font-semibold">
+			Featured Projects
+		</h2>
+		<p class="text-sm text-center">
+			These are projects I actively maintain and/or am currently working on
 		</p>
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{#each projects as project}
@@ -153,7 +183,10 @@
 	</section>
 
 	<!-- Learn more about me -->
-	<section class="relative px-8">
+	<section
+		in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
+		class="relative px-8"
+	>
 		<div
 			class="flex flex-col gap-4 p-4 items-center border border-border-default rounded-sm"
 		>
@@ -176,39 +209,3 @@
 		</div>
 	</section>
 </main>
-
-<style>
-	.fly-right-item {
-		opacity: 0;
-		transform: translateX(-50px);
-	}
-
-	.fly-right-item.animate-right {
-		animation: flyRight 300ms ease-out forwards;
-		animation-delay: var(--right-delay);
-	}
-
-	.fly-in-item {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-
-	.fly-in-item.animate-in {
-		animation: flyUp 300ms ease-out forwards;
-		animation-delay: var(--delay);
-	}
-
-	@keyframes flyRight {
-		to {
-			opacity: 1;
-			transform: translateX(0);
-		}
-	}
-
-	@keyframes flyUp {
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>

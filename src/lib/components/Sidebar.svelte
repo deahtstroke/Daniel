@@ -1,7 +1,15 @@
 <script lang="ts">
-	import { fadeFly, fadeFlyBlur } from "$lib/transitions/transitions";
+	import { fadeFly } from "$lib/transitions/transitions";
 	import { X } from "lucide-svelte";
 	import type { MenuOption } from "$lib/types/MenuOption";
+
+	let count: number = 1;
+	let staggerFunc = (reset: boolean) => {
+		if (reset) {
+			count = 1;
+		}
+		return count++ * 50;
+	};
 
 	let {
 		open = false,
@@ -20,7 +28,12 @@
 		role="dialog"
 		aria-modal="true"
 		aria-label="Navigation menu"
-		transition:fadeFly={{ x: 50, y: 0, duration: 200, delay: 0 }}
+		transition:fadeFly={{
+			x: 50,
+			y: 0,
+			duration: 100,
+			delay: 25,
+		}}
 	>
 		<!-- Side bar header -->
 		<div
@@ -41,20 +54,20 @@
 		</div>
 
 		<!-- Side bar items -->
-		<ul
-			class="flex flex-1 px-4 py-8 flex-col gap-4 items-end justify-start"
-			transition:fadeFlyBlur={{ delay: 25, duration: 200, y: 50 }}
-		>
-			{#each options as option, i (option)}
+		<ul class="flex flex-1 px-4 py-8 flex-col gap-4 items-end justify-start">
+			{#each options as option}
 				<li
-					class="menu-item px-4 py-2"
-					class:animate-in={open}
-					style="--delay: {i * 50}ms"
+					class="px-4 py-2"
+					in:fadeFly|global={{
+						delay: staggerFunc(false),
+						duration: 150,
+						y: -20,
+					}}
 				>
 					<a
 						href={option.ref}
 						{onclick}
-						class="group block px-3 py-2 text-default
+						class="group block px-3 py-2 text-bright sm:text-default
 						hover:text-bright focus:text-bright
 						transition-all duration-150 relative"
 					>
@@ -84,9 +97,8 @@
 
 		<!-- Sidebar footer -->
 		<div
-			class="footer-item px-6 py-5 border-t border-white/5"
-			class:animate-in={open}
-			style="--delay: {options.length * 50 + 100}ms"
+			in:fadeFly|global={{ delay: staggerFunc(true), duration: 300, y: -20 }}
+			class="px-6 py-5 border-t border-white/5"
 		>
 			<div
 				class="text-[10px] text-center tracking-[0.2em] uppercase font-[Satoshi-Light]"
@@ -96,24 +108,3 @@
 		</div>
 	</div>
 {/if}
-
-<style>
-	.footer-item,
-	.menu-item {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-
-	.footer-item.animate-in,
-	.menu-item.animate-in {
-		animation: flyUp 300ms ease-out forwards;
-		animation-delay: var(--delay);
-	}
-
-	@keyframes flyUp {
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>

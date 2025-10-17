@@ -1,99 +1,185 @@
 <script lang="ts">
-	interface Milestone {
-		year: String;
-		title: String;
-	}
+	import DotMilestoneTimeline from "$lib/components/DotMilestoneTimeline.svelte";
+	import type { Milestone } from "$lib/types/Milestone";
+	import type { Education } from "$lib/types/Education";
+
+	import { Github, Mail } from "lucide-svelte";
+	import { fadeFly } from "$lib/transitions/transitions";
+
+	let count: number = 0;
+
+	let fadeCount = (): number => {
+		return count++ * 25;
+	};
+
 	const milestones: Milestone[] = [
 		{
-			year: "Jun 2017 - Dec 2019",
-			title: "Started Community College at Sierra College",
+			year: "Jun 2017",
+			title: "Started Community College",
+			description: "Started Community College at Sierra College",
 		},
 		{
-			year: "Jan 2020 - Dec 2022",
-			title: "Transfered from Sierra College to Sacramento State University",
+			year: "Jan 2020",
+			title: "Transferred to Sacramento State",
+			description:
+				"Transfered from Sierra College to Sacramento State University",
 		},
 		{
-			year: "Jun 2022 - Oct 2023",
-			title: "Started working at UNFI",
+			year: "Jun 2022",
+			title: "First Software Development Job",
+			description:
+				"Started working for UNFI meanwhile I was finishing my studies",
 		},
 		{
 			year: "Oct 2023 - Present",
-			title: "Freelance Software Engineer",
+			title: "Freelancing",
+			description: "Started working as a freelancer",
+		},
+	];
+
+	const currentFocus: string[] = [
+		"Building distributed systems with Go",
+		"Exploring exciting technologies",
+		"Contributing to open source projects",
+		"Learning Rust for systems programming",
+	];
+
+	const educationsAndCerts: Education[] = [
+		{
+			degree: "B.S. Computer Science",
+			institution: "California State University, Sacramento",
+			year: "2020 - 2022",
+			details: "GPA: 3.77/4.00",
+		},
+		{
+			degree: "AWS Certified Cloud Practitioner",
+			institution: "Amazon Web Services",
+			year: "2025",
+			details: "Foundational cloud certification for AWS",
 		},
 	];
 </script>
 
-<div
-	class="flex flex-col px-8 py-4 sm:grid sm:grid-cols-[auto_1fr] gap-x-6 gap-y-8 items-center sm:items-start"
->
-	<!-- About section -->
-	<h2
-		class="hidden sm:block vertical-writing font-[Satoshi-Regular] uppercase tracking-widest text-sm"
-	>
-		About Me
-	</h2>
-	<div class="flex flex-col gap-4 text-sm">
-		<div class="flex flex-col gap-1 sm:hidden">
-			<h2 class="text-lg font-[Satoshi-Bold]">About Me</h2>
-			<hr class="opacity-25" />
-		</div>
-		<p>
-			I’m a freelance software engineer based in Roseville with a deep passion
-			for learning new technologies and building distributed systems. I’ve
-			always been fascinated by how cloud infrastructure and scalable services
-			come together to power modern applications. When I’m not online or buried
-			in documentation, you’ll probably find me hanging out with friends and
-			playing games — lately, Monster Hunter: Wilds has been my biggest time
-			sink (for better or worse).
-		</p>
-		<p>
-			My journey into software development began back in 2017, when I enrolled
-			in community college without really knowing what I wanted to study. With
-			each class I took, I found myself drawn deeper into computer science not
-			just as a subject, but as a way of thinking. Fast-forward to university:
-			during my senior year, I joined United Natural Foods (UNFI) as a Software
-			Engineer I. Balancing a full-time job with a full-time course load was
-			challenging, but it pushed me to grow quickly. I learned how to build REST
-			APIs, monitor distributed systems, and deploy services to the cloud using
-			CI/CD pipelines, among many other things.
-		</p>
-		<p>
-			After the subsequent layoffs at UNFI, I didn’t slow down. Instead, I used
-			that time to experiment with technologies that excited me. From reactive
-			frameworks to event-driven architectures and advanced deployment
-			workflows. This period of exploration has helped me sharpen my skills and
-			deepen my understanding of how reliable, modern systems are built. Today,
-			I’m focused on applying those lessons to create scalable, resilient
-			backend systems and continuing to push myself to learn what’s next.
-		</p>
-	</div>
-	<section class="max-w-2xl">
-		<div
-			class="flex flex-col px-8 py-4 sm:grid sm:grid-cols-[auto_1fr] gap-x-6 gap-y-8 items-center sm:items-start"
+<main class="flex flex-col mx-auto p-8 gap-4 sm:gap-8">
+	<section class="flex flex-col gap-2">
+		<h1
+			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			class="text-bright text-4xl font-bold md:text-center"
 		>
-			<!-- Milestones section -->
-			<div class="flex flex-col gap-4 text-sm w-full">
-				<div class="flex sm:hidden flex-col gap-1">
-					<h2 class="text-lg font-[Satoshi-Bold]">Milestones</h2>
-					<hr class="opacity-50" />
-				</div>
-				<ul class="flex flex-col gap-3">
-					{#each milestones as milestone}
-						<li class="grid grid-cols-[1fr_1fr] gap-1">
-							<h4 class="font-[Satoshi-Bold] font-bright mr-auto">
-								{milestone.year}
-							</h4>
-							<span>{milestone.title}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
-
-			<h2
-				class="hidden sm:block vertical-writing font-[Satoshi-Regular] uppercase tracking-widest text-sm"
+			Hi, I'm Daniel
+		</h1>
+		<p
+			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
+			class="md:text-center"
+		>
+			A software engineer passionate about building scalable systems and elegant
+			solutions. I specialize in backend development, distributed systems, and
+			turning complex problems into simple, maintainable, and testable code.
+		</p>
+	</section>
+	<section class="flex flex-col gap-4">
+		<h2
+			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			class="text-2xl font-semibold text-bright"
+		>
+			Philosophy
+		</h2>
+		<div class="space-y-4 border-l-4 border-border-default pl-4">
+			<blockquote
+				in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
+				class="text-sm"
 			>
-				Milestones
-			</h2>
+				I believe great software is built on three pillars: simplicity,
+				reliability, and testability. Code should be easy to understand, systems
+				should be resilient, and technology should serve people's needs.
+			</blockquote>
+			<blockquote
+				in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
+				class="text-sm"
+			>
+				I approach every problem with curiosity and pragmatism, always asking:
+				"What's the simplest solution that could work?" I value clean
+				architecture, thoughtful design, and continuous learning.
+			</blockquote>
 		</div>
 	</section>
-</div>
+	<!-- Milestones -->
+	<DotMilestoneTimeline
+		milestones={[...milestones]}
+		incrementFunc={fadeCount}
+	/>
+
+	<!-- Current Focus -->
+	<section class="flex flex-col gap-4">
+		<h2
+			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			class="text-bright text-2xl font-semibold"
+		>
+			Current Focus
+		</h2>
+		<div class="grid gap-3">
+			{#each currentFocus as focus}
+				<div class="flex items-start gap-3 group">
+					<div
+						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 flex-shrink-0"
+					></div>
+					<p class="text-default group-hover:text-bright transition-colors">
+						{focus}
+					</p>
+				</div>
+			{/each}
+		</div>
+	</section>
+
+	<!-- Education + Certifications -->
+	<section class="flex flex-col gap-4">
+		<h2 class="text-2xl font-semibold text-bright">
+			Education & Certifications
+		</h2>
+		<div class="space-y-6">
+			{#each educationsAndCerts as education}
+				<div class="space-y-2 pb-6 border-b border-neutral-800 last:border-0">
+					<div
+						class="flex flex-col md:flex-row md:items-baseline md:justify-between agap-2"
+					>
+						<h3 class="text-lg font-medium text-bright">{education.degree}</h3>
+						<span class="text-sm text-bright/40">{education.year}</span>
+					</div>
+					<p class="text-sm text-bright/50">{education.institution}</p>
+					<p class="text-sm text-bright/60">{education.details}</p>
+				</div>
+			{/each}
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="flex flex-col gap-4">
+		<div
+			class="bg-bg-dark border border-border-default rounded-lg p-8 space-y-4"
+		>
+			<h2 class="text-xl font-semibold text-bright">Let's Connect</h2>
+			<p class="text-bright/60 text-sm leading-relaxed">
+				Interested in working together or just want to chat about tech? I'm
+				always open to interesting conversations and new opportunities.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-3 pt-2">
+				<a
+					href="/contact"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bright text-neutral-900 rounded hover:bg-bright/90 transition-colors"
+				>
+					<Mail class="h-4 w-4" />
+					Contact Me
+				</a>
+				<a
+					href="https://github.com/deahtstroke"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center justify-center gap-2 px-6 py-2 bg-bg-default border border-border-default text-bright rounded hover:bg-bg-dark transition-colors"
+				>
+					<Github class="w-4 h-4" />
+					View my work
+				</a>
+			</div>
+		</div>
+	</section>
+</main>

@@ -1,3 +1,3 @@
-<footer class="text-center text-sm text-gray-400 py-4">
+<footer class="text-center text-sm text-gray-400 pt-16 pb-4">
 	&copy; 2025 Daniel Villavicencio. All rights reserved.
 </footer>
