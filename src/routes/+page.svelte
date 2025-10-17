@@ -8,7 +8,6 @@
 	import ProjectCard from "$lib/components/ProjectCard.svelte";
 	import type { Project } from "$lib/types/Project";
 	import type { CoreTechnologies } from "$lib/types/CoreTechnologies";
-	import { onMount } from "svelte";
 
 	let count: number = 0;
 	let staggerFunc = (reset: boolean): number => {
@@ -134,7 +133,7 @@
 	<section class="relative max-w-4xl px-8 py-4 flex flex-col gap-4">
 		<h2
 			in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
-			class="text-2xl text-default text-center font-semibold"
+			class="text-2xl text-bright text-center font-semibold"
 		>
 			Core Technologies
 		</h2>
