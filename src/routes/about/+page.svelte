@@ -14,26 +14,40 @@
 
 	const milestones: Milestone[] = [
 		{
-			year: "Jun 2017 - Dec 2019",
+			year: "June 2017",
 			title: "Started Community College",
-			description: "Started Community College at Sierra College",
-		},
-		{
-			year: "Jan 2020 - Dec 2022",
-			title: "Transferred to Sacramento State",
 			description:
-				"Transfered from Sierra College to Sacramento State University",
+				"Went to Sierra College at Rocklin, CA. \nGraduated with a 3.74/4.00 overall GPA.",
 		},
 		{
-			year: "Jun 2022 - Oct 2023",
+			year: "January 2020",
+			title: "Transferred to Sacramento State University",
+			description:
+				"Transfered from Sierra College to Sacramento State University. \nTook upper-division classes for Computer Science.",
+		},
+		{
+			year: "June 2022",
 			title: "First Software Development Job",
 			description:
-				"Started working for UNFI meanwhile I was finishing my studies",
+				"Started working for UNFI meanwhile I was finishing my studies.",
+		},
+		{
+			year: "Dec 2022",
+			title: "Graduated from Sacramento State",
+			description:
+				"Graduated with an overall 3.77/4.00 GPA from Sac-State with Cum Laude honors.",
+		},
+		{
+			year: "Oct 2023",
+			title: "UNFI layoffs",
+			description:
+				"UNFI held department-wide layoffs which directly affected my position.",
 		},
 		{
 			year: "Oct 2023 - Present",
-			title: "Freelancing",
-			description: "Started working as a freelancer",
+			title: "Career Advancement Period",
+			description:
+				"After layoffs happened I focused heavily on landing my next big opportunity and keeping my skills sharp through project-based learning and certifications.",
 		},
 	];
 
@@ -60,38 +74,42 @@
 	];
 </script>
 
-<main class="flex flex-col max-w-2xl mx-auto p-8 gap-4 sm:gap-10 md:gap-18">
+<main class="flex flex-col max-w-2xl mx-auto p-8 gap-10 sm:gap-18 md:gap-24">
 	<section class="flex flex-col gap-2">
 		<h1
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
-			class="text-bright text-4xl font-bold md:text-center"
+			class="text-bright text-4xl font-bold text-center"
 		>
 			Hi, I'm Daniel
 		</h1>
 		<p
 			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
-			class="md:text-center"
+			class="text-center"
 		>
 			A software engineer passionate about building scalable systems and elegant
 			solutions. I specialize in backend development, distributed systems, and
 			turning complex problems into simple, maintainable, and testable code.
 		</p>
 	</section>
-	<section class="flex flex-col gap-4">
+	<section class="flex flex-col items-center gap-6">
 		<h2
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
-			class="text-2xl font-semibold text-bright md:text-center"
+			class="text-2xl font-semibold text-bright text-center"
 		>
 			Philosophy
 		</h2>
-		<div class="space-y-4 border-l-4 border-border-default pl-4">
+		<div class="space-y-2 border-l-4 border-border-default pl-4">
 			<blockquote
 				in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
 				class="text-sm"
 			>
-				I believe great software is built on three pillars: simplicity,
-				reliability, and testability. Code should be easy to understand, systems
-				should be resilient, and technology should serve people's needs.
+				I believe great software is built on three pillars: <span
+					class="font-semibold text-bright">simplicity</span
+				>,
+				<span class="font-semibold text-bright">reliability</span>, and
+				<span class="font-semibold text-bright">testability</span>. Code should
+				be easy to understand, systems should be resilient, and technology
+				should serve people's needs.
 			</blockquote>
 			<blockquote
 				in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
@@ -110,18 +128,18 @@
 	/>
 
 	<!-- Current Focus -->
-	<section class="flex flex-col gap-4 md:items-center">
+	<section class="flex flex-col gap-6 items-center">
 		<h2
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
-			class="text-bright text-2xl font-semibold"
+			class="text-bright text-center text-2xl font-semibold"
 		>
 			Current Focus
 		</h2>
-		<div class="grid gap-3">
+		<div class="grid gap-2">
 			{#each currentFocus as focus}
 				<div
 					in:fadeFly|global={{ delay: fadeCount(), duration: 300, y: 20 }}
-					class="flex items-start gap-3 group"
+					class="flex items-start gap-2 group"
 				>
 					<div
 						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 flex-shrink-0"
@@ -135,11 +153,11 @@
 	</section>
 
 	<!-- Education + Certifications -->
-	<section class="flex flex-col gap-4">
-		<h2 class="text-2xl font-semibold text-bright md:text-center">
+	<section class="flex flex-col gap-6">
+		<h2 class="text-2xl font-semibold text-bright text-center">
 			Education & Certifications
 		</h2>
-		<div class="space-y-6">
+		<div class="space-y-2">
 			{#each educationsAndCerts as education}
 				<div class="space-y-2 pb-6 border-b border-neutral-800 last:border-0">
 					<div
@@ -156,18 +174,18 @@
 	</section>
 
 	<!-- CTA -->
-	<section class="flex flex-col gap-4">
+	<section class="flex flex-col gap-6">
 		<div
-			class="bg-bg-dark border border-border-default rounded-lg p-8 space-y-4"
+			class="bg-bg-dark border border-border-default rounded-lg p-8 space-y-2"
 		>
-			<h2 class="text-xl font-semibold text-bright md:text-center">
+			<h2 class="text-xl font-semibold text-bright text-center">
 				Let's Connect
 			</h2>
-			<p class="text-bright/60 text-sm leading-relaxed md:text-center">
+			<p class="text-bright/60 text-sm leading-relaxed text-center">
 				Interested in working together or just want to chat about tech? I'm
 				always open to interesting conversations and new opportunities.
 			</p>
-			<div class="flex flex-col sm:flex-row sm:justify-center gap-3 pt-2">
+			<div class="flex flex-col sm:flex-row sm:justify-center gap-2 pt-2">
 				<a
 					href="/contact"
 					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bright text-neutral-900 rounded hover:bg-bright/90 transition-colors"
@@ -179,7 +197,7 @@
 					href="https://github.com/deahtstroke"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="inline-flex items-center justify-center gap-2 px-6 py-2 bg-bg-default border border-border-default text-bright rounded hover:bg-bg-dark transition-colors"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright rounded hover:bg-bg-dark transition-colors"
 				>
 					<Github class="w-4 h-4" />
 					View my work

@@ -29,9 +29,8 @@
 		aria-modal="true"
 		aria-label="Navigation menu"
 		transition:fadeFly={{
-			x: 50,
-			y: 0,
-			duration: 100,
+			x: 25,
+			duration: 150,
 			delay: 25,
 		}}
 	>
@@ -67,9 +66,8 @@
 					<a
 						href={option.ref}
 						{onclick}
-						class="group block px-3 py-2 text-bright sm:text-default
-						hover:text-bright focus:text-bright
-						transition-all duration-150 relative"
+						class="group relative block px-3 py-2 text-bright sm:text-default
+						hover:text-bright focus:text-bright transition-all duration-150"
 					>
 						<div
 							class="absolute

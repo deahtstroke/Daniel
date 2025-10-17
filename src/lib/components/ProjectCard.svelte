@@ -25,19 +25,19 @@
 
 	<!-- Main content -->
 	<div class="flex flex-1 flex-col p-6 gap-4">
-		<h3 class="text-xl font-[Satoshi-Bold]">
+		<h3 class="text-xl font-bold">
 			{project.title}
 		</h3>
-		<h4 class="text-light">Description</h4>
+		<h4 class="text-light font-bold">Description</h4>
 		<p class="text-xs text-default leading-relaxed">
 			{project.description}
 		</p>
 
-		<h4 class="text-light">Tech Stack</h4>
+		<h4 class="text-light font-bold">Tech Stack</h4>
 		<div class="flex flex-wrap gap-2">
 			{#each project.technologies as tech}
 				<span
-					class="font-[Satoshi-Light] px-2 py-1 text-[10px] uppercase tracking-wider bg-bg-dark border border-border-default"
+					class="px-2 py-1 text-[10px] uppercase tracking-wider bg-bg-dark border border-border-default"
 				>
 					{tech}
 				</span>

@@ -67,36 +67,36 @@
 	];
 </script>
 
-<main class="flex flex-col items-center gap-5 align-middle">
+<main class="flex flex-col items-center gap-10 sm:gap-18 md:gap-24 mb-20">
 	<!-- Hero banner -->
 	<section
-		class="relative w-full p-8 bg-linear-to-r from-purple-500 to-pink-500"
+		class="relative w-full px-8 py-12 bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
 	>
 		<div
-			class="gap-4 max-w-3xl m-auto flex flex-col items-center justify-center"
+			class="gap-6 max-w-3xl m-auto py-8 flex flex-col items-center justify-center"
 		>
 			<h1
 				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
-				class="font-[Satoshi-Bold] text-center text-bright text-5xl"
+				class="font-[Satoshi-Bold] text-center text-bright text-5xl md:text-7xl"
 			>
-				Hello there, I'm Daniel
+				Daniel Villavicencio
 			</h1>
+			<p
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
+				class="text-xl md:text-2xl text-default font-medium tracking-wide"
+			>
+				Software Engineer
+			</p>
 			<h2
-				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
 				class="text-center text-bright text-md"
 			>
-				Building Scalable Distributed Backend Systems
+				Specializing in distributed systems, backend architecture, and DevOps
+				automation.
 			</h2>
-			<p
-				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
-				class="text-bright text-sm text-center"
-			>
-				I'm a Full-Stack Software Engineer that specializes in building
-				distributed systems and building DevOps deployment pipelines.
-			</p>
 
 			<!-- Action buttons -->
-			<div class="flex gap-3 justify-center pt-4 pb-2">
+			<div class="flex gap-2 justify-center pt-4 pb-2">
 				<button
 					in:fadeFly|global={{
 						delay: staggerFunc(false),
@@ -105,7 +105,7 @@
 					}}
 					aria-label="Connect button"
 					class="group
-				flex gap-2 px-2 py-1 border items-center rounded-sm text-bright border-bright lg:text-default lg:border-default
+				flex gap-2 px-6 py-3 border items-center rounded text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
 					<span class="text-sm">Connect</span>
@@ -119,10 +119,10 @@
 						y: 20,
 					}}
 					class="
-				flex px-2 py-1 gap-2 border items-center rounded-sm text-bright border-bright lg:text-default lg:border-default
+				flex px-6 py-3 gap-2 border items-center rounded text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
-					<span class="text-sm">View Projects</span>
+					<span class="text-sm">Projects</span>
 					<FolderDotIcon class="w-4 h-4" />
 				</button>
 			</div>
@@ -130,7 +130,7 @@
 	</section>
 
 	<!-- Core Technologies -->
-	<section class="relative max-w-4xl px-8 py-4 flex flex-col gap-4">
+	<section class="relative max-w-4xl px-8 py-4 flex flex-col gap-6">
 		<h2
 			in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
 			class="text-2xl text-bright text-center font-semibold"
@@ -140,13 +140,11 @@
 		{#each coreTechnologies as tech}
 			<h3
 				in:fadeFly|global={{ delay: staggerFunc(true), duration: 150, x: 20 }}
-				class="font-semibold text-lg text-default text-start md:text-center"
+				class="font-semibold text-lg text-default text-center"
 			>
 				{tech.category}
 			</h3>
-			<div
-				class="flex flex-row flex-wrap justify-start md:justify-center gap-2"
-			>
+			<div class="flex flex-row flex-wrap justify-center gap-2">
 				{#each tech.technologies as elem}
 					<div
 						in:fadeFly|global={{
@@ -166,7 +164,7 @@
 	<!-- Featured Projects -->
 	<section
 		in:fadeFly={{ delay: staggerFunc(true), duration: 300 }}
-		class="relative max-w-6xl px-8 py-4 flex flex-col items-center gap-4"
+		class="relative max-w-6xl px-8 py-4 flex flex-col items-center gap-6"
 	>
 		<h2 class="text-2xl text-bright text-center font-semibold">
 			Featured Projects
@@ -174,7 +172,7 @@
 		<p class="text-sm text-center">
 			These are projects I actively maintain and/or am currently working on
 		</p>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
 			{#each projects as project}
 				<ProjectCard {project} />
 			{/each}
@@ -187,7 +185,7 @@
 		class="relative px-8"
 	>
 		<div
-			class="flex flex-col gap-4 p-4 items-center border border-border-default rounded-sm"
+			class="flex flex-col gap-6 p-4 items-center border border-border-default rounded-sm"
 		>
 			<h1 class="text-xl text-bright text-center font-bold">
 				Learn more about my journey
@@ -208,3 +206,33 @@
 		</div>
 	</section>
 </main>
+
+<style>
+	@keyframes gradient-shift {
+		0% {
+			background-position: 0% 0%;
+			background-size: 300% 300%;
+		}
+
+		25% {
+			background-position: 100% 0%;
+			background-size: 300% 300%;
+		}
+		50% {
+			background-position: 100% 100%;
+			background-size: 300% 300%;
+		}
+
+		75% {
+			background-position: 0% 100%;
+			background-size: 300% 300%;
+		}
+		100% {
+			background-position: 0% 0%;
+			background-size: 300% 300%;
+		}
+	}
+	.animate-gradient-shift {
+		animation: gradient-shift 8s ease-in-out infinite;
+	}
+</style>

@@ -13,12 +13,6 @@
 			icon: Home,
 		},
 		{
-			name: "About",
-			desc: "Learn more about me",
-			ref: "/about",
-			icon: User,
-		},
-		{
 			name: "Projects",
 			desc: "View my work",
 			ref: "/projects",
@@ -29,6 +23,12 @@
 			desc: "Get in touch with me",
 			ref: "Contact",
 			icon: Mail,
+		},
+		{
+			name: "About",
+			desc: "Learn more about me",
+			ref: "/about",
+			icon: User,
 		},
 		{
 			name: "Source",
@@ -45,8 +45,10 @@
 	}
 </script>
 
-<nav class="sticky top-0 h-16 mx-auto p-8 backdrop-blur-md z-40">
-	<div class="max-w-2xl mx-auto h-full flex flex-row items-center">
+<nav class="sticky top-0 h-18 backdrop-blur-md z-40">
+	<div
+		class="max-w-2xl m-auto h-full px-8 py-4 flex flex-row align-middle items-center"
+	>
 		<a
 			class="font-bold mr-auto tracking-wide text-bright text-md hover:cursor-pointer"
 			href="/"
@@ -59,9 +61,22 @@
 			class="flex flex-row gap-4 text-bright mx-2 justify-center content-center"
 		>
 			{#each menuOptions as option}
-				<li class="nav-link"><a href={option.ref}>{option.name}</a></li>
+				<li>
+					<a
+						href={option.ref}
+						class="group relative overflow-hidden text-default font-bold hidden md:inline-block content-center cursor-pointer
+							hover:text-bright"
+					>
+						{option.name}
+						<div
+							class="absolute bottom-0 left-0 right-0 bg-bright h-[2px] scale-x-0
+						group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-300
+						origin-center"
+						></div>
+					</a>
+				</li>
 			{/each}
-			<li class="block sm:hidden relative content-start">
+			<li class="block md:hidden relative content-start">
 				<HamburgerButton onclick={toggleSidebar} />
 			</li>
 		</ul>
