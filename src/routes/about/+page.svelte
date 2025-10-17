@@ -14,18 +14,18 @@
 
 	const milestones: Milestone[] = [
 		{
-			year: "Jun 2017",
+			year: "Jun 2017 - Dec 2019",
 			title: "Started Community College",
 			description: "Started Community College at Sierra College",
 		},
 		{
-			year: "Jan 2020",
+			year: "Jan 2020 - Dec 2022",
 			title: "Transferred to Sacramento State",
 			description:
 				"Transfered from Sierra College to Sacramento State University",
 		},
 		{
-			year: "Jun 2022",
+			year: "Jun 2022 - Oct 2023",
 			title: "First Software Development Job",
 			description:
 				"Started working for UNFI meanwhile I was finishing my studies",
@@ -60,7 +60,7 @@
 	];
 </script>
 
-<main class="flex flex-col mx-auto p-8 gap-4 sm:gap-8">
+<main class="flex flex-col max-w-2xl mx-auto p-8 gap-4 sm:gap-10 md:gap-18">
 	<section class="flex flex-col gap-2">
 		<h1
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
@@ -80,7 +80,7 @@
 	<section class="flex flex-col gap-4">
 		<h2
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
-			class="text-2xl font-semibold text-bright"
+			class="text-2xl font-semibold text-bright md:text-center"
 		>
 			Philosophy
 		</h2>
@@ -110,7 +110,7 @@
 	/>
 
 	<!-- Current Focus -->
-	<section class="flex flex-col gap-4">
+	<section class="flex flex-col gap-4 md:items-center">
 		<h2
 			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
 			class="text-bright text-2xl font-semibold"
@@ -119,7 +119,10 @@
 		</h2>
 		<div class="grid gap-3">
 			{#each currentFocus as focus}
-				<div class="flex items-start gap-3 group">
+				<div
+					in:fadeFly|global={{ delay: fadeCount(), duration: 300, y: 20 }}
+					class="flex items-start gap-3 group"
+				>
 					<div
 						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 flex-shrink-0"
 					></div>
@@ -133,14 +136,14 @@
 
 	<!-- Education + Certifications -->
 	<section class="flex flex-col gap-4">
-		<h2 class="text-2xl font-semibold text-bright">
+		<h2 class="text-2xl font-semibold text-bright md:text-center">
 			Education & Certifications
 		</h2>
 		<div class="space-y-6">
 			{#each educationsAndCerts as education}
 				<div class="space-y-2 pb-6 border-b border-neutral-800 last:border-0">
 					<div
-						class="flex flex-col md:flex-row md:items-baseline md:justify-between agap-2"
+						class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2"
 					>
 						<h3 class="text-lg font-medium text-bright">{education.degree}</h3>
 						<span class="text-sm text-bright/40">{education.year}</span>
@@ -157,12 +160,14 @@
 		<div
 			class="bg-bg-dark border border-border-default rounded-lg p-8 space-y-4"
 		>
-			<h2 class="text-xl font-semibold text-bright">Let's Connect</h2>
-			<p class="text-bright/60 text-sm leading-relaxed">
+			<h2 class="text-xl font-semibold text-bright md:text-center">
+				Let's Connect
+			</h2>
+			<p class="text-bright/60 text-sm leading-relaxed md:text-center">
 				Interested in working together or just want to chat about tech? I'm
 				always open to interesting conversations and new opportunities.
 			</p>
-			<div class="flex flex-col sm:flex-row gap-3 pt-2">
+			<div class="flex flex-col sm:flex-row sm:justify-center gap-3 pt-2">
 				<a
 					href="/contact"
 					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bright text-neutral-900 rounded hover:bg-bright/90 transition-colors"

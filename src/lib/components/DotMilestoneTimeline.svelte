@@ -20,7 +20,7 @@
 <section class="flex flex-col gap-4">
 	<h2
 		in:fadeFly={{ delay: incrementFunc(), duration: 300, x: 20 }}
-		class="text-2xl font-semibold text-bright"
+		class="text-2xl font-semibold text-bright md:text-center"
 	>
 		Career Milestones
 	</h2>
@@ -39,9 +39,11 @@
 					class="space-y-2"
 				>
 					<div
-						class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4"
+						class="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-4"
 					>
-						<h3 class="text-lg font-medium text-bright">{milestone.title}</h3>
+						<h3 class="text-lg font-medium text-bright">
+							{milestone.title}
+						</h3>
 						<span class="text-sm font-medium text-white/40"
 							>{milestone.year}</span
 						>
