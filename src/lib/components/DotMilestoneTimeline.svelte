@@ -19,7 +19,7 @@
 
 <section class="flex flex-col gap-6 items-center">
 	<h2
-		in:fadeFly={{ delay: incrementFunc(), duration: 300, x: 20 }}
+		in:fadeFly|global={{ delay: incrementFunc(), duration: 300, y: 20 }}
 		class="text-2xl font-semibold text-bright"
 	>
 		Career Milestones

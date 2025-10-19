@@ -67,7 +67,7 @@
 	];
 </script>
 
-<main class="flex flex-col items-center gap-10 sm:gap-18 md:gap-24 mb-20">
+<main class="flex flex-col items-center gap-10 sm:gap-18 md:gap-24">
 	<!-- Hero banner -->
 	<section
 		class="relative w-full px-8 py-12 bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
@@ -76,19 +76,19 @@
 			class="gap-6 max-w-6xl m-auto py-8 flex flex-col items-center justify-center"
 		>
 			<h1
-				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
 				class="font-bold text-center text-bright text-5xl md:text-7xl"
 			>
 				Daniel Villavicencio
 			</h1>
 			<p
-				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
 				class="text-xl md:text-2xl text-default font-medium tracking-wide"
 			>
 				Software Engineer
 			</p>
 			<h2
-				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
 				class="text-center text-bright text-md"
 			>
 				Specializing in distributed systems, backend architecture, and DevOps
@@ -105,7 +105,7 @@
 					}}
 					aria-label="Connect button"
 					class="group
-				flex gap-2 px-6 py-3 border items-center rounded text-bright border-bright lg:text-default lg:border-default
+				flex gap-2 px-6 py-3 border items-center text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
 					<span class="text-sm">Connect</span>
@@ -119,7 +119,7 @@
 						y: 20,
 					}}
 					class="
-				flex px-6 py-3 gap-2 border items-center rounded text-bright border-bright lg:text-default lg:border-default
+				flex px-6 py-3 gap-2 border items-center text-bright border-bright lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
 					<span class="text-sm">Projects</span>
@@ -132,14 +132,14 @@
 	<!-- Core Technologies -->
 	<section class="relative max-w-6xl px-8 py-4 flex flex-col gap-6">
 		<h2
-			in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
+			in:fadeFly={{ delay: staggerFunc(true), duration: 300, y: 20 }}
 			class="text-2xl text-bright text-center font-semibold"
 		>
 			Core Technologies
 		</h2>
 		{#each coreTechnologies as tech}
 			<h3
-				in:fadeFly|global={{ delay: staggerFunc(true), duration: 150, x: 20 }}
+				in:fadeFly|global={{ delay: staggerFunc(true), duration: 150, y: 20 }}
 				class="font-semibold text-lg text-default text-center"
 			>
 				{tech.category}
@@ -150,7 +150,7 @@
 						in:fadeFly|global={{
 							delay: staggerFunc(false),
 							duration: 200,
-							x: 20,
+							y: 20,
 						}}
 						class="relative py-1 px-2 bg-bg-dark border border-border-default uppercase text-xs hover:bg-bg-default"
 					>
@@ -181,12 +181,10 @@
 
 	<!-- Learn more about me -->
 	<section
-		in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
+		in:fadeFly={{ delay: staggerFunc(true), duration: 300, y: 20 }}
 		class="relative px-8"
 	>
-		<div
-			class="flex flex-col gap-6 p-4 items-center border border-border-default rounded-sm"
-		>
+		<div class="flex flex-col gap-6 p-4 items-center">
 			<h1 class="text-xl text-bright text-center font-bold">
 				Learn more about my journey
 			</h1>
@@ -197,10 +195,12 @@
 			<div class="flex">
 				<a
 					href="/about"
-					class="inline-flex group items-center gap-2 px-4 py-2 bg-bg-card text-default hover:bg-bg-dark border border-border-default rounded-md transition-all duration-150"
+					class="inline-flex group items-center gap-2 px-4 py-2 bg-bg-card text-default hover:bg-bg-dark border border-border-default transition-all duration-150"
 				>
 					Read my story
-					<ArrowRight class="w-4 h-4 group-hover:translate-x-2" />
+					<ArrowRight
+						class="w-4 h-4 group-hover:translate-x-2 transition-all 300"
+					/>
 				</a>
 			</div>
 		</div>

@@ -64,7 +64,7 @@
 				<li>
 					<a
 						href={option.ref}
-						class="group relative overflow-hidden text-default font-bold hidden md:inline-block content-center cursor-pointer
+						class="group relative overflow-hidden text-default hidden md:inline-block content-center cursor-pointer
 							hover:text-bright"
 					>
 						{option.name}

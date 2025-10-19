@@ -77,14 +77,14 @@
 <main class="flex flex-col max-w-2xl mx-auto p-8 gap-10 sm:gap-18 md:gap-24">
 	<section class="flex flex-col gap-2">
 		<h1
-			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
 			class="text-bright text-4xl font-bold text-center"
 		>
 			Hi, I'm Daniel
 		</h1>
 		<p
 			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
-			class="text-center"
+			class="text-sm text-center"
 		>
 			A software engineer passionate about building scalable systems and elegant
 			solutions. I specialize in backend development, distributed systems, and
@@ -93,7 +93,7 @@
 	</section>
 	<section class="flex flex-col items-center gap-6">
 		<h2
-			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
 			class="text-2xl font-semibold text-bright text-center"
 		>
 			Philosophy
@@ -130,7 +130,7 @@
 	<!-- Current Focus -->
 	<section class="flex flex-col gap-6 items-center">
 		<h2
-			in:fadeFly={{ delay: fadeCount(), duration: 300, x: 20 }}
+			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
 			class="text-bright text-center text-2xl font-semibold"
 		>
 			Current Focus
@@ -144,7 +144,9 @@
 					<div
 						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 flex-shrink-0"
 					></div>
-					<p class="text-default group-hover:text-bright transition-colors">
+					<p
+						class="text-default text-sm group-hover:text-bright transition-colors"
+					>
 						{focus}
 					</p>
 				</div>
@@ -175,9 +177,7 @@
 
 	<!-- CTA -->
 	<section class="flex flex-col gap-6">
-		<div
-			class="bg-bg-dark border border-border-default rounded-lg p-8 space-y-2"
-		>
+		<div class="p-8 space-y-2">
 			<h2 class="text-xl font-semibold text-bright text-center">
 				Let's Connect
 			</h2>
@@ -188,7 +188,7 @@
 			<div class="flex flex-col sm:flex-row sm:justify-center gap-2 pt-2">
 				<a
 					href="/contact"
-					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bright text-neutral-900 rounded hover:bg-bright/90 transition-colors"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright hover:bg-bg-dark transition-colors"
 				>
 					<Mail class="h-4 w-4" />
 					Contact Me
@@ -197,7 +197,7 @@
 					href="https://github.com/deahtstroke"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright rounded hover:bg-bg-dark transition-colors"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright hover:bg-bg-dark transition-colors"
 				>
 					<Github class="w-4 h-4" />
 					View my work
