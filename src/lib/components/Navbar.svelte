@@ -21,7 +21,7 @@
 		{
 			name: "Contact",
 			desc: "Get in touch with me",
-			ref: "Contact",
+			ref: "/contact",
 			icon: Mail,
 		},
 		{

@@ -73,11 +73,11 @@
 		class="relative w-full px-8 py-12 bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
 	>
 		<div
-			class="gap-6 max-w-3xl m-auto py-8 flex flex-col items-center justify-center"
+			class="gap-6 max-w-6xl m-auto py-8 flex flex-col items-center justify-center"
 		>
 			<h1
 				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, x: 20 }}
-				class="font-[Satoshi-Bold] text-center text-bright text-5xl md:text-7xl"
+				class="font-bold text-center text-bright text-5xl md:text-7xl"
 			>
 				Daniel Villavicencio
 			</h1>
@@ -130,7 +130,7 @@
 	</section>
 
 	<!-- Core Technologies -->
-	<section class="relative max-w-4xl px-8 py-4 flex flex-col gap-6">
+	<section class="relative max-w-6xl px-8 py-4 flex flex-col gap-6">
 		<h2
 			in:fadeFly={{ delay: staggerFunc(true), duration: 300, x: 20 }}
 			class="text-2xl text-bright text-center font-semibold"
