@@ -188,7 +188,7 @@
 			<div class="flex flex-col sm:flex-row sm:justify-center gap-2 pt-2">
 				<a
 					href="/contact"
-					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright hover:bg-bg-dark transition-colors"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default rounded text-bright hover:bg-bg-dark transition-colors"
 				>
 					<Mail class="h-4 w-4" />
 					Contact Me
@@ -197,7 +197,7 @@
 					href="https://github.com/deahtstroke"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default text-bright hover:bg-bg-dark transition-colors"
+					class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-bg-default border border-border-default rounded text-bright hover:bg-bg-dark transition-colors"
 				>
 					<Github class="w-4 h-4" />
 					View my work

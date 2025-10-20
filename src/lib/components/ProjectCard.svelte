@@ -8,7 +8,7 @@
 </script>
 
 <article
-	class="group flex flex-col relative bg-bg-card border border-border-medium
+	class="group flex flex-col relative bg-bg-card border rounded border-border-medium
 	hover:border-border-default transition-all duration-300 overflow-hidden"
 >
 	<!-- Image header -->
@@ -51,7 +51,7 @@
 			href={project.githubUrl}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default text-default hover:bg-bg-dark transition-all duration-300 group/link"
+			class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default rounded text-default hover:bg-bg-dark transition-all duration-300 group/link"
 		>
 			<Github class="w-4 h-4" />
 			<span>Source</span>
@@ -61,7 +61,7 @@
 				href={project.websiteUrl}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default text-default hover:bg-bg-dark transition-all duration-300 group/link"
+				class="flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider bg-bg-default border border-border-default rounded text-default hover:bg-bg-dark transition-all duration-300 group/link"
 			>
 				<ExternalLinkIcon class="w-4 h-4" />
 				<span>Visit</span>

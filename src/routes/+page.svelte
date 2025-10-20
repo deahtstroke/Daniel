@@ -97,7 +97,8 @@
 
 			<!-- Action buttons -->
 			<div class="flex gap-2 justify-center pt-4 pb-2">
-				<button
+				<a
+					href="/contact"
 					in:fadeFly|global={{
 						delay: staggerFunc(false),
 						duration: 300,
@@ -105,13 +106,14 @@
 					}}
 					aria-label="Connect button"
 					class="group
-				flex gap-2 px-6 py-3 border items-center text-bright border-bright lg:text-default lg:border-default
+				flex gap-2 px-6 py-3 border items-center text-bright border-bright rounded lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
 					<span class="text-sm">Connect</span>
 					<Mail class="w-4 h-4" />
-				</button>
-				<button
+				</a>
+				<a
+					href="/projects"
 					aria-label="Portfolio button"
 					in:fadeFly|global={{
 						delay: staggerFunc(false),
@@ -119,12 +121,12 @@
 						y: 20,
 					}}
 					class="
-				flex px-6 py-3 gap-2 border items-center text-bright border-bright lg:text-default lg:border-default
+				flex px-6 py-3 gap-2 border items-center text-bright border-bright rounded lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
-					<span class="text-sm">Projects</span>
+					<span class="text-sm">My Projects</span>
 					<FolderDotIcon class="w-4 h-4" />
-				</button>
+				</a>
 			</div>
 		</div>
 	</section>
