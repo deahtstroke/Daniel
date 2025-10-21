@@ -5,4 +5,5 @@ export interface MenuOption {
 	desc: string,
 	ref: string;
 	icon: typeof Icon;
+	target?: string;
 }

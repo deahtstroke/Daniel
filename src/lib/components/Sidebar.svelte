@@ -2,6 +2,7 @@
 	import { fadeFly } from "$lib/transitions/transitions";
 	import { X } from "lucide-svelte";
 	import type { MenuOption } from "$lib/types/MenuOption";
+	import { page } from "$app/state";
 
 	let count: number = 1;
 	let staggerFunc = (reset: boolean) => {
@@ -73,12 +74,14 @@
 							class="absolute
 						top-0 right-0 bottom-0 w-0.5 bg-bright scale-y-0
 						group-hover:scale-y-100 group-focus:scale-y-100 transition-transform duration-300
-						origin-center"
+						origin-center {page.url.pathname === option.ref ? 'scale-y-100' : ''}"
 						></div>
 						<div
 							class="relative flex justify-center items-center gap-3
 							transform transition-transform duration-150
-							group-hover:translate-x-[-4px] group-focus:translate-x-[-4px]"
+							group-hover:translate-x-[-4px] group-focus:translate-x-[-4px]
+							group-active:scale-y-100
+							{page.url.pathname === option.ref ? 'translate-x-[-4px]' : ''}"
 						>
 							<div class="flex flex-col gap-0.5 text-right">
 								<span class="text-sm">{option.name}</span>

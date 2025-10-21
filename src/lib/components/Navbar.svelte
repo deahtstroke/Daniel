@@ -1,6 +1,7 @@
 <script lang="ts">
 	import HamburgerButton from "./HamburgerButton.svelte";
 	import Sidebar from "./Sidebar.svelte";
+	import { page } from "$app/state";
 	import { User, Briefcase, Mail, Github, Home, FileText } from "lucide-svelte";
 
 	import type { MenuOption } from "$lib/types/MenuOption";
@@ -40,6 +41,7 @@
 			name: "Source",
 			desc: "View code for this page",
 			ref: "https://www.github.com/deahtstroke/Daniel",
+			target: "_blank",
 			icon: Github,
 		},
 	];
@@ -63,21 +65,20 @@
 		</a>
 
 		<!-- NavBar options desktop -->
-		<ul
-			class="flex flex-row gap-4 text-bright mx-2 justify-center content-center"
-		>
+		<ul class="flex flex-row gap-4 mx-2 justify-center content-center">
 			{#each menuOptions as option}
 				<li>
 					<a
 						href={option.ref}
-						class="group relative overflow-hidden text-default hidden md:inline-block content-center cursor-pointer
-							hover:text-bright"
+						target={option.target ? option.target : ""}
+						class="group relative overflow-hidden hidden md:inline-block content-center cursor-pointer hover:text-bright
+						{option.ref === page.url.pathname ? 'text-bright' : 'text-default'}"
 					>
 						{option.name}
 						<div
 							class="absolute bottom-0 left-0 right-0 bg-bright h-[2px] scale-x-0
 						group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-300
-						origin-center"
+						origin-center {option.ref === page.url.pathname ? 'scale-x-100' : ''}"
 						></div>
 					</a>
 				</li>

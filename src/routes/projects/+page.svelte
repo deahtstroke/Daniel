@@ -45,7 +45,7 @@
 </script>
 
 <section
-	class="flex flex-col px-8 py-4 mx-auto align-middle items-center max-w-4xl gap-8"
+	class="flex flex-col px-8 py-4 mx-auto align-middle items-center max-w-6xl gap-8"
 >
 	<div class="flex flex-col gap-1 w-full">
 		<h2 class="text-lg font-[Satoshi-Bold]">Projects</h2>

@@ -155,7 +155,7 @@
 	<section
 		class="relative flex flex-col items-center justify-center w-full h-[calc(100vh-4rem)] bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
 	>
-		<div class="gap-6 max-w-6xl px-8 flex flex-col items-center justify-center">
+		<div class="gap-6 max-w-6xl p-8 flex flex-col items-center justify-center">
 			<h3
 				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
 				class="text-lg text-bright font-semibold"

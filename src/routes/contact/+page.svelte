@@ -358,6 +358,7 @@
 				>
 					<a
 						href="/resume.pdf"
+						download
 						target="_blank"
 						rel="noopener noreferrer"
 						class="m-auto text-default group-hover:text-cyan-600 transition-colors"
