@@ -1,7 +1,7 @@
 <script lang="ts">
 	import HamburgerButton from "./HamburgerButton.svelte";
 	import Sidebar from "./Sidebar.svelte";
-	import { User, Briefcase, Mail, Github, Home } from "lucide-svelte";
+	import { User, Briefcase, Mail, Github, Home, FileText } from "lucide-svelte";
 
 	import type { MenuOption } from "$lib/types/MenuOption";
 
@@ -31,6 +31,12 @@
 			icon: User,
 		},
 		{
+			name: "Resume",
+			desc: "See my resume",
+			ref: "/resume",
+			icon: FileText,
+		},
+		{
 			name: "Source",
 			desc: "View code for this page",
 			ref: "https://www.github.com/deahtstroke/Daniel",
@@ -47,7 +53,7 @@
 
 <nav class="sticky top-0 h-18 backdrop-blur-md z-40">
 	<div
-		class="max-w-2xl m-auto h-full px-8 py-4 flex flex-row align-middle items-center"
+		class="max-w-6xl m-auto h-full px-8 py-4 flex flex-row align-middle items-center"
 	>
 		<a
 			class="font-bold mr-auto tracking-wide text-bright text-md hover:cursor-pointer"

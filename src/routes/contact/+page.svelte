@@ -55,8 +55,6 @@
 			newErrors.message = "Message must be at least 10 characters";
 		}
 
-		console.log(newErrors.message);
-
 		errors = newErrors;
 		return Object.keys(newErrors).length === 0;
 	}
@@ -79,7 +77,6 @@
 
 		await new Promise((resolve) => setTimeout(resolve, 1500));
 
-		console.log(`Form submitted`, formData);
 		submitStatus = "success";
 		isSubmitting = false;
 
@@ -361,9 +358,10 @@
 				>
 					<a
 						href="/resume.pdf"
-						download
+						target="_blank"
+						rel="noopener noreferrer"
 						class="m-auto text-default group-hover:text-cyan-600 transition-colors"
-						aria-label="download resume link"
+						aria-label="open resume"
 					>
 						<div class="flex flex-start gap-3">
 							<Download class="h-5 w-5" />

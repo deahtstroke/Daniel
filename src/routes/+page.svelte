@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fadeFly } from "$lib/transitions/transitions";
-	import { FolderDotIcon, Mail, ArrowRight } from "lucide-svelte";
+	import { FolderDotIcon, Mail, ArrowRight, ChevronDown } from "lucide-svelte";
 	import gsmt from "$lib/assets/gsmt.png";
 	import protheon from "$lib/assets/Protheon.png";
 	import dapProfiler from "$lib/assets/dap-profiler.png";
@@ -8,6 +8,10 @@
 	import ProjectCard from "$lib/components/ProjectCard.svelte";
 	import type { Project } from "$lib/types/Project";
 	import type { CoreTechnologies } from "$lib/types/CoreTechnologies";
+	import { onMount } from "svelte";
+
+	let greetingText = $state("");
+	let greetingIndex = 0;
 
 	let count: number = 0;
 	let staggerFunc = (reset: boolean): number => {
@@ -65,19 +69,102 @@
 			githubUrl: "http://www.github.com/deahtstroke/dap-profiler.nvim",
 		},
 	];
+
+	const greetings = [
+		"Hello",
+		"Hola",
+		"Bonjour",
+		"こんにちは",
+		"Ciao",
+		"Hallo",
+		"Olá",
+		"안녕하세요",
+		"Привет",
+		"مرحبا",
+	];
+
+	onMount(() => {
+		let charIndex: number = 0;
+		let isDeleting: boolean = false;
+		let isPaused: boolean = false;
+		let timeoutId: number;
+
+		const type: () => void = () => {
+			const currentGreeting = greetings[greetingIndex];
+
+			if (isPaused) {
+				setTimeout(() => {
+					isPaused = false;
+					isDeleting = true;
+					type();
+				}, 3000); // Pause 3 seconds
+				return;
+			}
+
+			if (isDeleting) {
+				greetingText = currentGreeting.substring(0, charIndex);
+				charIndex--;
+
+				if (charIndex < 0) {
+					isDeleting = false;
+					charIndex = 0;
+					greetingIndex = (greetingIndex + 1) % greetings.length;
+				}
+
+				timeoutId = setTimeout(type, 50);
+			} else {
+				greetingText = currentGreeting.substring(0, charIndex + 1);
+				charIndex++;
+
+				if (charIndex === currentGreeting.length) {
+					isPaused = true;
+				}
+
+				timeoutId = setTimeout(type, 100);
+			}
+		};
+
+		type();
+
+		return () => {
+			if (timeoutId) {
+				clearTimeout(timeoutId);
+			}
+		};
+	});
+
+	function scrollToProjects() {
+		const element = document.getElementById("projects");
+		if (element) {
+			const navBarHeight = 64;
+			const extraPadding = 32;
+			const elementPosition =
+				element.getBoundingClientRect().top + window.scrollY;
+			const offsetPosition = elementPosition - navBarHeight - extraPadding;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth",
+			});
+		}
+	}
 </script>
 
 <main class="flex flex-col items-center gap-10 sm:gap-18 md:gap-24">
 	<!-- Hero banner -->
 	<section
-		class="relative w-full px-8 py-12 bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
+		class="relative flex flex-col items-center justify-center w-full h-[calc(100vh-4rem)] bg-linear-to-br from-slate-700 via-blue-700 to-cyan-600 animate-gradient-shift"
 	>
-		<div
-			class="gap-6 max-w-6xl m-auto py-8 flex flex-col items-center justify-center"
-		>
+		<div class="gap-6 max-w-6xl px-8 flex flex-col items-center justify-center">
+			<h3
+				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
+				class="text-lg text-bright font-semibold"
+			>
+				{greetingText}<span>, my name is</span>
+			</h3>
 			<h1
 				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
-				class="font-bold text-center text-bright text-5xl md:text-7xl"
+				class="font-bold text-center text-bright text-6xl md:text-7xl"
 			>
 				Daniel Villavicencio
 			</h1>
@@ -91,12 +178,15 @@
 				in:fadeFly|global={{ delay: staggerFunc(false), duration: 300, y: 20 }}
 				class="text-center text-bright text-md"
 			>
-				Specializing in distributed systems, backend architecture, and DevOps
-				automation.
+				Backend engineer specializing in distributed systems, cloud
+				architecture, and high-performance applications. Passionate about
+				building robust, scalable solutions that solve real-world problems.
 			</h2>
 
 			<!-- Action buttons -->
-			<div class="flex gap-2 justify-center pt-4 pb-2">
+			<div
+				class="flex flex-col sm:flex-row justify-center max-w-1xl w-full gap-4 pt-4 pb-2"
+			>
 				<a
 					href="/contact"
 					in:fadeFly|global={{
@@ -106,10 +196,10 @@
 					}}
 					aria-label="Connect button"
 					class="group
-				flex gap-2 px-6 py-3 border items-center text-bright border-bright rounded lg:text-default lg:border-default
+				flex gap-2 px-8 py-3 border items-center justify-center text-bright border-bright rounded lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
-					<span class="text-sm">Connect</span>
+					<span class="text-sm">Contact Me</span>
 					<Mail class="w-4 h-4" />
 				</a>
 				<a
@@ -120,14 +210,41 @@
 						duration: 300,
 						y: 20,
 					}}
-					class="
-				flex px-6 py-3 gap-2 border items-center text-bright border-bright rounded lg:text-default lg:border-default
+					class=" group
+				flex px-6 py-3 gap-2 border items-center justify-center text-bright border-bright rounded lg:text-default lg:border-default
 				hover:text-bright hover:border-bright transition-all duration-300 cursor-pointer"
 				>
-					<span class="text-sm">My Projects</span>
+					<span class="text-sm">View Projects</span>
 					<FolderDotIcon class="w-4 h-4" />
 				</a>
 			</div>
+		</div>
+
+		<button
+			onclick={scrollToProjects}
+			aria-label="Scroll to Projects"
+			class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hover:cursor-pointer"
+		>
+			<ChevronDown class="w-6 h-6 text-cyan-400/90" />
+		</button>
+	</section>
+
+	<!-- Featured Projects -->
+	<section
+		id="projects"
+		in:fadeFly={{ delay: staggerFunc(true), duration: 300 }}
+		class="relative max-w-6xl px-8 py-4 flex flex-col items-center gap-6"
+	>
+		<h2 class="text-2xl text-bright text-center font-semibold">
+			Featured Projects
+		</h2>
+		<p class="text-sm text-center">
+			These are projects I actively maintain and/or am currently working on
+		</p>
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+			{#each projects as project}
+				<ProjectCard {project} />
+			{/each}
 		</div>
 	</section>
 
@@ -142,7 +259,7 @@
 		{#each coreTechnologies as tech}
 			<h3
 				in:fadeFly|global={{ delay: staggerFunc(true), duration: 150, y: 20 }}
-				class="font-semibold text-lg text-default text-center"
+				class="font-semibold text-lg text-bright text-center"
 			>
 				{tech.category}
 			</h3>
@@ -163,24 +280,6 @@
 		{/each}
 	</section>
 
-	<!-- Featured Projects -->
-	<section
-		in:fadeFly={{ delay: staggerFunc(true), duration: 300 }}
-		class="relative max-w-6xl px-8 py-4 flex flex-col items-center gap-6"
-	>
-		<h2 class="text-2xl text-bright text-center font-semibold">
-			Featured Projects
-		</h2>
-		<p class="text-sm text-center">
-			These are projects I actively maintain and/or am currently working on
-		</p>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-			{#each projects as project}
-				<ProjectCard {project} />
-			{/each}
-		</div>
-	</section>
-
 	<!-- Learn more about me -->
 	<section
 		in:fadeFly={{ delay: staggerFunc(true), duration: 300, y: 20 }}
@@ -197,7 +296,8 @@
 			<div class="flex">
 				<a
 					href="/about"
-					class="inline-flex group items-center gap-2 px-4 py-2 bg-bg-card text-default hover:bg-bg-dark border border-border-default transition-all duration-150"
+					class="inline-flex group items-center gap-2 px-4 py-2 bg-bg-card text-default border border-border-default rounded
+					hover:bg-bg-dark transition-all duration-150"
 				>
 					Read my story
 					<ArrowRight
