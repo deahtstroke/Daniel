@@ -70,19 +70,12 @@
 						class="group relative block px-3 py-2 text-bright sm:text-default
 						hover:text-bright focus:text-bright transition-all duration-150"
 					>
-						<div
-							class="absolute
-						top-0 right-0 bottom-0 w-0.5 bg-bright scale-y-0
-						group-hover:scale-y-100 group-focus:scale-y-100 transition-transform duration-300
-						origin-center {page.url.pathname === option.ref ? 'scale-y-100' : ''}"
-						></div>
-						<div
-							class="relative flex justify-center items-center gap-3
-							transform transition-transform duration-150
-							group-hover:translate-x-[-4px] group-focus:translate-x-[-4px]
-							group-active:scale-y-100
-							{page.url.pathname === option.ref ? 'translate-x-[-4px]' : ''}"
-						>
+						{#if option.ref === page.url.pathname}
+							<div
+								class="absolute top-0 right-0 bottom-0 w-0.5 bg-cyan-400 scale-y-100"
+							></div>
+						{/if}
+						<div class="relative flex justify-center items-center gap-3">
 							<div class="flex flex-col gap-0.5 text-right">
 								<span class="text-sm">{option.name}</span>
 								<span class="text-xs text-default normal-case"

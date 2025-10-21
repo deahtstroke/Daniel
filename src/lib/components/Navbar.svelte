@@ -71,15 +71,14 @@
 					<a
 						href={option.ref}
 						target={option.target ? option.target : ""}
-						class="group relative overflow-hidden hidden md:inline-block content-center cursor-pointer hover:text-bright
-						{option.ref === page.url.pathname ? 'text-bright' : 'text-default'}"
+						class="group relative hidden md:inline-block content-center cursor-pointer text-default hover:text-bright"
 					>
 						{option.name}
-						<div
-							class="absolute bottom-0 left-0 right-0 bg-bright h-[2px] scale-x-0
-						group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-300
-						origin-center {option.ref === page.url.pathname ? 'scale-x-100' : ''}"
-						></div>
+						{#if option.ref === page.url.pathname}
+							<div
+								class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-400"
+							></div>
+						{/if}
 					</a>
 				</li>
 			{/each}
