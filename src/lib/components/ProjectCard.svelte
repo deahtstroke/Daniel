@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Project } from "$lib/types/Project";
 	import { ExternalLinkIcon, Github } from "lucide-svelte";
+	import TechStackThumbnail from "./TechStackThumbnail.svelte";
 
 	let { project } = $props<{
 		project: Project;
@@ -13,13 +14,17 @@
 >
 	<!-- Image header -->
 	<div class="relative h-48 overflow-hidden bg-dark">
-		<img
-			src={project.image}
-			alt={project.title}
-			class="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-		/>
+		{#if project.image}
+			<img
+				src={project.image}
+				alt={project.title}
+				class="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+			/>
+		{:else}
+			<TechStackThumbnail technologies={project.technologies} />
+		{/if}
 		<div
-			class="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent"
+			class="absolute inset-0 bg-linear-to-t from-neutral-900 to-transparent"
 		></div>
 	</div>
 

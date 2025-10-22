@@ -1,59 +1,176 @@
 <script lang="ts">
 	import ProjectCard from "$lib/components/ProjectCard.svelte";
-	import type { Project } from "$lib/types/Project";
-	import gsmt from "$lib/assets/gsmt.png";
-	import verityHelper from "$lib/assets/verity-inside-helper.png";
-	import protheon from "$lib/assets/Protheon.png";
-	import dapProfiler from "$lib/assets/dap-profiler.png";
 
-	const projects: Project[] = [
-		{
-			title: "Go Schema Migration Tool (Gsmt)",
-			description:
-				"Lightweight embedded-schema and data migration library for Go. It helps you apply, track and validate schema and data changes in your database at runtime.",
-			image: gsmt,
-			technologies: ["Go", "SQL", "PostgreSQL"],
-			githubUrl: "http://www.github.com/deahtstroke/gsmt",
-		},
-		{
-			title: "Verity Inside Helper",
-			description:
-				"Interactive website to provide instructional assitance to Destiny 2 players with the inside portion of the Verity encounter in Salvation's Edge. " +
-				"",
-			image: verityHelper,
-			technologies: ["Typescript", "Svelte", "HTML", "Vanilla CSS"],
-			githubUrl: "https://www.github.com/deahtstroke/verity-inside-helper",
-			websiteUrl: "https://verity-inside-helper.vercel.app/",
-		},
-		{
-			title: "Protheon, Modular Mind",
-			description:
-				"Protheon is a distributed job orchestration system built in Go that coordinates workers across multiple machines to process large-scale data pipelines efficiently. It uses RabbitMQ for message brokering, supports real-time worker registration and heartbeats, and is designed to handle high-throughput workloads like streaming and processing large .jsonl.zst datasets",
-			image: protheon,
-			technologies: ["Go", "PostgreSQL", "RabbitMQ", "TCP Sockets", "Docker"],
-			githubUrl: "http://www.github.com/deahtstroke/Protheon",
-		},
-		{
-			title: "Dap-Profiler.nvim",
-			description:
-				"Dap-Profiler.nvim is a lightweight Neovim plugin that enhances the nvim-dap (Debug Adapter Protocol) experience by allowing developers to create, organize and switch between debugging profiles effortlessly. It’s designed for developers who work across multiple projects, languages, or configurations and need a convenient way to manage DAP setups without constantly editing Lua tables or JSON configs.",
-			image: dapProfiler,
-			technologies: ["Lua", "Neovim", "DAP"],
-			githubUrl: "http://www.github.com/deahtstroke/dap-profiler.nvim",
-		},
-	];
+	import { data as projects } from "$lib/data/projects";
+	import { fadeFly } from "$lib/transitions/transitions";
+	import { ArrowDown, ArrowUp, Search, X } from "lucide-svelte";
+	import { stagger } from "$lib/utils/staggeredCount";
+
+	let staggeredCount = () => {
+		return stagger(false);
+	};
+
+	let resetStagger = () => {
+		return stagger(true);
+	};
+
+	let searchQuery = $state<string>("");
+	let sortBy = $state<"name" | "techCount">("name");
+	let sortOrder = $state<"asc" | "desc">("asc");
+
+	let filteredProjects = $derived(
+		projects
+			.filter((p) => {
+				if (!searchQuery.trim()) {
+					return true;
+				}
+
+				const query = searchQuery.toLowerCase();
+				return (
+					p.title.toLowerCase().includes(query) ||
+					p.description.toLowerCase().includes(query) ||
+					p.technologies.some((t) => t.toLowerCase().includes(query))
+				);
+			})
+			.sort((a, b) => {
+				if (sortBy === "name") {
+					return sortOrder === "asc"
+						? a.title.localeCompare(b.title)
+						: b.title.localeCompare(a.title);
+				} else if (sortBy === "techCount") {
+					return sortOrder === "asc"
+						? a.technologies.length - b.technologies.length
+						: b.technologies.length - a.technologies.length;
+				}
+				return 0;
+			}),
+	);
+
+	let hasActiveFilters = $derived(searchQuery.trim() != "");
+
+	function toggleSortOrder() {
+		sortOrder = sortOrder === "asc" ? "desc" : "asc";
+		localStorage.setItem("projectsSortOrder", sortOrder);
+	}
+
+	function clearFilters() {
+		searchQuery = "";
+		sortBy = "name";
+	}
 </script>
 
-<section
-	class="flex flex-col px-8 py-4 mx-auto align-middle items-center max-w-6xl gap-8"
->
-	<div class="flex flex-col gap-1 w-full">
-		<h2 class="text-lg font-[Satoshi-Bold]">Projects</h2>
-		<hr class="opacity-50" />
+<main class="w-full px-8">
+	<div class="max-w-4xl mx-auto flex flex-col items-center gap-8 sm:gap-12">
+		<!-- Hero section -->
+		<section class="relative py-12 flex flex-col gap-6 items-center">
+			<h1
+				in:fadeFly={{ delay: staggeredCount(), duration: 300, y: 20 }}
+				class="font-bold text-center text-bright text-5xl md:text-7xl"
+			>
+				Projects
+			</h1>
+			<p
+				in:fadeFly={{ delay: staggeredCount(), duration: 300, y: 20 }}
+				class="text-lg text-default text-center"
+			>
+				Explore my work across various technologies and domains
+			</p>
+		</section>
+
+		<!-- Search panel -->
+
+		<div
+			class="flex flex-col w-full md:flex-row gap-4 items-start md:items-center justify-between"
+		>
+			<!-- Search bar -->
+			<div
+				class="relative flex-1 w-full"
+				in:fadeFly={{ delay: staggeredCount(), duration: 300, y: 20 }}
+			>
+				{#if hasActiveFilters}
+					<X
+						onclick={clearFilters}
+						class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-bright hover:cursor-pointer"
+					/>
+				{:else}
+					<Search
+						class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-bright"
+					/>
+				{/if}
+				<input
+					type="text"
+					bind:value={searchQuery}
+					placeholder="Search Projects or Technologies..."
+					class="pl-10 w-full pr-4 py-2 bg-bg-dark border border-border-default rounded placeholder:text-bright/40 text-default focus:outline-none focus:border-cyan-500 transition-colors"
+				/>
+			</div>
+
+			<!-- Sorting Options -->
+			<div class="flex flex-row gap-2">
+				<div
+					class="flex items-center gap-2"
+					in:fadeFly={{ delay: staggeredCount(), duration: 300, y: 20 }}
+				>
+					<select
+						bind:value={sortBy}
+						class="px-4 py-2 bg-bg-dark border border-border-default rounded focus:outline-none focus:border-cyan-500 transition-colors"
+					>
+						<option value="name">Sort by Name</option>
+						<option value="techCount">Sort by Tech #</option>
+					</select>
+				</div>
+				<button
+					onclick={toggleSortOrder}
+					aria-label="Sorting ascending/descending button"
+					class="text-default flex items-center gap-2 px-3 py-2 bg-bg-dark border border-border-default rounded hover:border-cyan-500 hover:text-bright"
+				>
+					{#if sortOrder === "asc"}
+						<ArrowUp class="w-4 h-4" />
+					{:else}
+						<ArrowDown class="w-4 h-4" />
+					{/if}
+					<span class="text-xs uppercase md:hidden">
+						{sortOrder === "asc" ? "A-Z" : "Z-A"}
+					</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Project Results -->
+		<section
+			class="flex flex-col items-center gap-6"
+			in:fadeFly={{ delay: resetStagger(), duration: 300, y: 20 }}
+		>
+			{#if filteredProjects.length > 0}
+				<h3 class="text-default font-light">
+					Showing {filteredProjects.length} of {projects.length} projects
+				</h3>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{#each filteredProjects as project (project.title)}
+						<ProjectCard {project} />
+					{/each}
+				</div>
+			{:else}
+				<div
+					class="w-16 h-16 border-2 border-neutral-800 flex items-center justify-center"
+				>
+					<Search class="w-8 h-8 text-neutral/700" />
+				</div>
+				<div class="text-center space-y-2">
+					<h3 class="text-xl font-semibold text-default">No Projects Found</h3>
+					<p class="text-default text-center max-w-md">
+						Try adjusting your search or filters to find what you're looking for
+					</p>
+					{#if hasActiveFilters}
+						<button
+							onclick={clearFilters}
+							class="mt-4 px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-bright transition-colors"
+						>
+							Clear all filters
+						</button>
+					{/if}
+				</div>
+			{/if}
+		</section>
 	</div>
-	<div class="grid items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-		{#each projects as project}
-			<ProjectCard {project} />
-		{/each}
-	</div>
-</section>
+</main>

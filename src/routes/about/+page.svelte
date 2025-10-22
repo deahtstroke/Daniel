@@ -78,13 +78,13 @@
 	<section class="flex flex-col gap-2">
 		<h1
 			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
-			class="text-bright text-4xl font-bold text-center"
+			class="text-bright text-5xl md:text-7xl font-bold text-center"
 		>
 			Hi, I'm Daniel
 		</h1>
 		<p
 			in:fadeFly={{ delay: fadeCount(), duration: 300, y: 20 }}
-			class="text-sm text-center"
+			class="sm text-center"
 		>
 			A software engineer passionate about building scalable systems and elegant
 			solutions. I specialize in backend development, distributed systems, and
@@ -142,7 +142,7 @@
 					class="flex items-start gap-2 group"
 				>
 					<div
-						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 flex-shrink-0"
+						class="mt-2.5 w-1.5 h-1.5 rounded-full bg-white/40 group-hover:bg-white/60 shrink-0"
 					></div>
 					<p
 						class="text-default text-sm group-hover:text-bright transition-colors"

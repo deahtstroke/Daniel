@@ -153,7 +153,7 @@
 							oninput={() => clearError("name")}
 							placeholder="John Doe"
 							class="w-full px-4 py-3 bg-bg-dark border border-border-default
-					rounded text-bright focus:outline-none focus:border-cyan-500 transition-colors
+					rounded text-bright placeholder:text-bright/40 focus:outline-none focus:border-cyan-500 transition-colors
 					{errors.name ? 'border-red-500' : ''}"
 						/>
 						{#if errors.name}
@@ -175,7 +175,7 @@
 							oninput={() => clearError("email")}
 							autocomplete="email"
 							placeholder="johndoe@example.com"
-							class="w-full px-4 py-3 bg-bg-dark border border-border-default
+							class="w-full px-4 py-3 bg-bg-dark border border-border-default placeholder:text-bright/40
 							rounded text-bright focus:outline-none focus:border-cyan-500 transition-colors
 							{errors.email ? 'border-red-500' : ''}"
 						/>
@@ -196,12 +196,13 @@
 							id="subject"
 							bind:value={formData.subject}
 							oninput={() => clearError("subject")}
-							placeholder="johndoe@example.com"
-							class="w-full px-4 py-3 bg-bg-dark border border-border-default
-					rounded text-bright focus:outline-none focus:border-cyan-500 transition-colors
+							class="w-full px-4 py-3 bg-bg-dark border border-border-default placeholder:text-bright/40
+					rounded text-default focus:outline-none focus:border-cyan-500 transition-colors
 					{errors.subject ? 'border-red-500' : ''}"
 						>
-							<option value="" class="text-default">Select a Subject</option>
+							<option value="" disabled selected hidden class="text-bright/40"
+								>Select a Subject</option
+							>
 							<option value="General Inquiry">General Inquiry</option>
 							<option value="Project Collaboration"
 								>Project Collaboration</option
@@ -292,14 +293,14 @@
 							href="mailto:dvm3099@pm.me"
 							class="flex items-start gap-3 text-default hover:text-cyan-600 transition-colors group"
 						>
-							<Mail class="w-5 h-5 flex-shrink-0" />
+							<Mail class="w-5 h-5 shrink-0" />
 							<div>
 								<p class="text-xs text-default/40">Email</p>
 								<p class="group-hover: underline">dvm3099@pm.me</p>
 							</div>
 						</a>
 						<div class="flex items-start gap-3 text-default">
-							<MapPin class="w-5 h-5 flex-shrink-0" />
+							<MapPin class="w-5 h-5 shrink-0" />
 							<div>
 								<p class="text-xs text-default/40">Location</p>
 								<p>Roseville, CA</p>
@@ -307,7 +308,7 @@
 							</div>
 						</div>
 						<div class="flex items-start gap-3 text-default/">
-							<Timer class="w-5 h-5 flex-shrink-0" />
+							<Timer class="w-5 h-5 shrink-0" />
 							<div>
 								<p class="text-xs text-default/40">Timezone</p>
 								<p>PST (UTC-7)</p>
@@ -332,7 +333,7 @@
 							class="group text-default hover:text-cyan-600 transition-colors"
 						>
 							<div class="flex items-start gap-3">
-								<GithubIcon class="w-5 h-5 flex-shrink-0" />
+								<GithubIcon class="w-5 h-5 shrink-0" />
 								<p class="text-sm">GitHub</p>
 							</div>
 						</a>
@@ -343,7 +344,7 @@
 							class="group text-default hover:text-cyan-600 transition-colors"
 						>
 							<div class="flex items-start gap-3">
-								<LinkedinIcon class="w-5 h-5 flex-shrink-0" />
+								<LinkedinIcon class="w-5 h-5 shrink-0" />
 								<p class="text-sm">LinkedIn</p>
 							</div>
 						</a>
@@ -381,15 +382,15 @@
 					</h3>
 					<div class="flex flex-col gap-2">
 						<div class="flex flex-start gap-3 text-default">
-							<Server class="w-5 h-5 text-cyan-500 flex-shrink-0" />
+							<Server class="w-5 h-5 text-cyan-500 shrink-0" />
 							<span class="text-sm">Backend Systems</span>
 						</div>
 						<div class="flex flex-start gap-3 text-default">
-							<Cloud class="w-5 h-5 text-cyan-500 flex-shrink-0" />
+							<Cloud class="w-5 h-5 text-cyan-500 shrink-0" />
 							<span class="text-sm">Cloud Systems</span>
 						</div>
 						<div class="flex flex-start gap-3 text-default">
-							<Code class="w-5 h-5 text-cyan-500 flex-shrink-0" />
+							<Code class="w-5 h-5 text-cyan-500 shrink-0" />
 							<span class="text-sm">DevOps & CI/CD</span>
 						</div>
 					</div>
