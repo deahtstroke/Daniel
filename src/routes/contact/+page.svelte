@@ -13,6 +13,42 @@
 	} from "lucide-svelte";
 	import { fadeFly } from "$lib/transitions/transitions";
 
+	type InquiryType =
+		| "general"
+		| "collab"
+		| "job"
+		| "freelance"
+		| "bug"
+		| "other"
+		| "";
+
+	const inquiries: { label: string; value: InquiryType }[] = [
+		{
+			label: "General Inquiry",
+			value: "general",
+		},
+		{
+			label: "Project Collaboration",
+			value: "collab",
+		},
+		{
+			label: "Job Opportunity",
+			value: "job",
+		},
+		{
+			label: "Freelance Work",
+			value: "freelance",
+		},
+		{
+			label: "Bug Report",
+			value: "bug",
+		},
+		{
+			label: "Other",
+			value: "other",
+		},
+	];
+
 	let count: number = 0;
 	let staggeredCount: (reset: boolean) => number = (reset) => {
 		if (reset) {
@@ -26,9 +62,10 @@
 	let formData = $state<{
 		name: string;
 		email: string;
+		inquiryType: InquiryType;
 		subject: string;
 		message: string;
-	}>({ name: "", email: "", subject: "", message: "" });
+	}>({ name: "", email: "", inquiryType: "", subject: "", message: "" });
 
 	let errors = $state<Record<string, string>>({});
 	let isSubmitting = $state<boolean>(false);
@@ -43,6 +80,10 @@
 
 		if (!formData.email.trim()) {
 			newErrors.email = "Email is required";
+		}
+
+		if (formData.inquiryType === "" || !formData.inquiryType.trim()) {
+			newErrors.inquiryType = "Inquiry type cannot be blank";
 		}
 
 		if (!formData.subject.trim()) {
@@ -84,11 +125,40 @@
 			formData = {
 				name: "",
 				email: "",
+				inquiryType: "",
 				subject: "",
 				message: "",
 			};
 			submitStatus = "idle";
 		}, 3000);
+	}
+
+	function getRandomSubjectPlaceholder(): string {
+		const placeholders = [
+			"Make it sound important 😎",
+			"Insert clickbait here...",
+			"The world’s shortest essay",
+			"Tell me what’s up (politely)",
+			"Something witty goes here",
+			"Subject? I hardly know her!",
+			"This better not be ‘no subject’",
+			"What’s this email *really* about?",
+			"Operation: Impress the recipient",
+			"pls open this email 🙏",
+			"Make the inbox exciting again",
+			"Hot take, incoming",
+			"The suspense starts here",
+			"Your subject line, your legacy",
+			"Professional email noises...",
+			"Warning: may contain opinions",
+			"Insert dramatic headline",
+			"Definitely not spam",
+			"Plot twist in the subject line",
+			"TL;DR starts here",
+		];
+
+		const randomIndex = Math.floor(Math.random() * placeholders.length);
+		return placeholders[randomIndex];
 	}
 </script>
 
@@ -136,7 +206,12 @@
 					</p>
 				</div>
 
-				<form onsubmit={handleSubmit} novalidate class="flex flex-col gap-6">
+				<form
+					onsubmit={handleSubmit}
+					novalidate
+					class="cf-turnstile flex flex-col gap-6"
+					data-sitekey="0x4AAAAAAB8Kyhx16DqpPvEy"
+				>
 					<!-- Name -->
 					<div
 						in:fadeFly={{ delay: staggeredCount(false), duration: 300, y: 20 }}
@@ -183,7 +258,33 @@
 							<p class="text-sm text-red-500">{errors.email}</p>
 						{/if}
 					</div>
-
+					<!-- Inquiry Type -->
+					<div
+						in:fadeFly={{ delay: staggeredCount(false), duration: 300, y: 20 }}
+						class="flex flex-col gap-2"
+					>
+						<label for="inquiryType" class="block text-sm text-default">
+							Inquiry Type <span class="text-red-500">*</span>
+						</label>
+						<select
+							id="inquiryType"
+							bind:value={formData.inquiryType}
+							oninput={() => clearError("inquiryType")}
+							class="w-full px-4 py-3 bg-bg-dark border border-border-default placeholder:text-bright/40
+					rounded text-default focus:outline-none focus:border-cyan-500 transition-colors
+					{errors.inquiryType ? 'border-red-500' : ''}"
+						>
+							<option value="" disabled selected hidden class="text-default/40"
+								>Select an Inquiry Type</option
+							>
+							{#each inquiries as inquiry}
+								<option value={inquiry.value}>{inquiry.label}</option>
+							{/each}
+						</select>
+						{#if errors.inquiryType}
+							<p class="text-sm text-red-500">{errors.inquiryType}</p>
+						{/if}
+					</div>
 					<!-- Subject -->
 					<div
 						in:fadeFly={{ delay: staggeredCount(false), duration: 300, y: 20 }}
@@ -192,26 +293,16 @@
 						<label for="subject" class="block text-sm text-default">
 							Subject <span class="text-red-500">*</span>
 						</label>
-						<select
+						<input
+							type="text"
 							id="subject"
 							bind:value={formData.subject}
 							oninput={() => clearError("subject")}
+							placeholder={getRandomSubjectPlaceholder()}
 							class="w-full px-4 py-3 bg-bg-dark border border-border-default placeholder:text-bright/40
-					rounded text-default focus:outline-none focus:border-cyan-500 transition-colors
-					{errors.subject ? 'border-red-500' : ''}"
-						>
-							<option value="" disabled selected hidden class="text-bright/40"
-								>Select a Subject</option
-							>
-							<option value="General Inquiry">General Inquiry</option>
-							<option value="Project Collaboration"
-								>Project Collaboration</option
-							>
-							<option value="Job Opportunity">Job Opportunity</option>
-							<option value="Freelance Work">Freelance Work</option>
-							<option value="Bug Report">Bug Report</option>
-							<option value="Other">Other</option>
-						</select>
+							rounded text-bright focus:outline-none focus:border-cyan-500 transition-colors
+							{errors.subject ? 'border-red-500' : ''}"
+						/>
 						{#if errors.subject}
 							<p class="text-sm text-red-500">{errors.subject}</p>
 						{/if}
