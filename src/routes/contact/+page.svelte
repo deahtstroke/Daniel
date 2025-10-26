@@ -206,12 +206,11 @@
 					</p>
 				</div>
 
-				<form
-					onsubmit={handleSubmit}
-					novalidate
-					class="cf-turnstile flex flex-col gap-6"
-					data-sitekey="0x4AAAAAAB8Kyhx16DqpPvEy"
-				>
+				<form onsubmit={handleSubmit} novalidate class="flex flex-col gap-6">
+					<div
+						class="cf-turnstile"
+						data-sitekey="0x4AAAAAAB8Kyhx16DqpPvEy"
+					></div>
 					<!-- Name -->
 					<div
 						in:fadeFly={{ delay: staggeredCount(false), duration: 300, y: 20 }}
