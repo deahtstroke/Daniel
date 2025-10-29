@@ -45,6 +45,7 @@
 	let errors = $state<Record<string, string>>({});
 	let isSubmitting = $state<boolean>(false);
 	let submitStatus = $state<SubmissionStatus>("idle");
+	let submissionError = $state<string>("");
 
 	function validateForm(): boolean {
 		const newErrors: Record<string, string> = {};
@@ -104,23 +105,36 @@
 			const contactUrl = import.meta.env.VITE_CONTACT_URL;
 			if (!contactUrl) {
 				submitStatus = "error";
-				return;
+				throw new Error("The email API url is not set");
 			}
 			const response = await fetch(import.meta.env.VITE_CONTACT_URL, {
 				method: "POST",
 				body: JSON.stringify(formData),
 			});
+
 			if (!response || response.status !== 200) {
 				submitStatus = "error";
-				return;
+				throw new Error(
+					"Unable to authenticate the legimitacy of your message",
+				);
 			}
 		} catch (error) {
-			submitStatus = "error";
+			if (error instanceof Error) {
+				submitStatus = "error";
+				submissionError = `Oops! ${error.message}`;
+				cleanUp();
+			} else {
+				submitStatus = "error";
+				submissionError = `Something unexpected happened: ${error}`;
+				cleanUp();
+			}
 		}
 
 		submitStatus = "success";
 		isSubmitting = false;
+	}
 
+	function cleanUp() {
 		setTimeout(() => {
 			formData = {
 				name: "",
@@ -128,9 +142,10 @@
 				inquiryType: "",
 				subject: "",
 				message: "",
-				cfToken: cfToken,
+				cfToken: "",
 			};
 			submitStatus = "idle";
+			submissionError = "";
 		}, 3000);
 	}
 
@@ -367,8 +382,7 @@
 							</p>
 						{:else if submitStatus === "error"}
 							<p class="text-sm text-red-500">
-								Oops! There was an error sending your message, please try again
-								later.
+								{submissionError}
 							</p>
 						{/if}
 					</div>
