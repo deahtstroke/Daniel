@@ -9,12 +9,12 @@
 	"env": {
 		"production": {
 			"vars": {
-				"VITE_CONTACT_URL": "https://api.danielvm.dev/contact"
+				"CONTACT_URL": "https://api.danielvm.dev/contact"
 			}
 		},
 		"local": {
 			"vars": {
-				"VITE_CONTACT_URL": "http://localhost:3000/contact"
+				"CONTACT_URL": "http://localhost:3000/contact"
 			}
 		}
 	}

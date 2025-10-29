@@ -7,7 +7,10 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
+		interface ProcessEnv {
+			CONTACT_URL: string;
+		}
 	}
 }
 
-export {};
+export { };

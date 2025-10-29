@@ -102,11 +102,12 @@
 		try {
 			isSubmitting = true;
 			formData.cfToken = cfToken;
-			const contactUrl = import.meta.env.VITE_CONTACT_URL;
+			const contactUrl = process.env.CONTACT_URL;
 			if (!contactUrl) {
 				submitStatus = "error";
 				throw new Error("The email API url is not set");
 			}
+
 			const response = await fetch(contactUrl, {
 				method: "POST",
 				body: JSON.stringify(formData),
