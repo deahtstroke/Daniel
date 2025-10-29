@@ -84,7 +84,6 @@
 	}
 
 	async function handleSubmit(e: Event) {
-		const cloudflareToken = "cf-turnstile-response";
 		e.preventDefault();
 
 		const form = new FormData(e.currentTarget);
@@ -93,60 +92,56 @@
 			return;
 		}
 
+		const cloudflareToken = "cf-turnstile-response";
 		const cfToken = form.get(cloudflareToken);
 		if (typeof cfToken !== "string") {
 			console.log("Expected CfToken to be a string");
 			return;
 		}
 
-		isSubmitting = true;
-
 		try {
+			isSubmitting = true;
+			formData.cfToken = cfToken;
 			const contactUrl = import.meta.env.VITE_CONTACT_URL;
 			if (!contactUrl) {
 				submitStatus = "error";
 				throw new Error("The email API url is not set");
 			}
-			const response = await fetch(import.meta.env.VITE_CONTACT_URL, {
+			const response = await fetch(contactUrl, {
 				method: "POST",
 				body: JSON.stringify(formData),
 			});
 
-			if (!response || response.status !== 200) {
+			if (!response.ok) {
 				submitStatus = "error";
 				throw new Error(
 					"Unable to authenticate the legimitacy of your message",
 				);
 			}
+			submitStatus = "success";
 		} catch (error) {
 			if (error instanceof Error) {
 				submitStatus = "error";
 				submissionError = `Oops! ${error.message}`;
-				cleanUp();
 			} else {
 				submitStatus = "error";
 				submissionError = `Something unexpected happened: ${error}`;
-				cleanUp();
 			}
+		} finally {
+			isSubmitting = false;
+			setTimeout(() => {
+				formData = {
+					name: "",
+					email: "",
+					inquiryType: "",
+					subject: "",
+					message: "",
+					cfToken: "",
+				};
+				submitStatus = "idle";
+				submissionError = "";
+			}, 3000);
 		}
-
-		submitStatus = "success";
-		isSubmitting = false;
-	}
-
-	function cleanUp() {
-		setTimeout(() => {
-			formData = {
-				name: "",
-				email: "",
-				inquiryType: "",
-				subject: "",
-				message: "",
-				cfToken: "",
-			};
-			submitStatus = "idle";
-			submissionError = "";
-		}, 3000);
 	}
 
 	function getRandomSubjectPlaceholder(): string {
