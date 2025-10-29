@@ -12,41 +12,15 @@
 		Timer,
 	} from "lucide-svelte";
 	import { fadeFly } from "$lib/transitions/transitions";
+	import type { ContactRequest, InquiryType } from "$lib/types/ContactRequest";
 
-	type InquiryType =
-		| "general"
-		| "collab"
-		| "job"
-		| "freelance"
-		| "bug"
-		| "other"
-		| "";
-
-	const inquiries: { label: string; value: InquiryType }[] = [
-		{
-			label: "General Inquiry",
-			value: "general",
-		},
-		{
-			label: "Project Collaboration",
-			value: "collab",
-		},
-		{
-			label: "Job Opportunity",
-			value: "job",
-		},
-		{
-			label: "Freelance Work",
-			value: "freelance",
-		},
-		{
-			label: "Bug Report",
-			value: "bug",
-		},
-		{
-			label: "Other",
-			value: "other",
-		},
+	const inquiries: InquiryType[] = [
+		"General Inquiry",
+		"Project Collaboration",
+		"Job Opportunity",
+		"Freelance Work",
+		"Bug Report",
+		"Other",
 	];
 
 	let count: number = 0;
@@ -59,13 +33,14 @@
 
 	type SubmissionStatus = "idle" | "submitting" | "success" | "error";
 
-	let formData = $state<{
-		name: string;
-		email: string;
-		inquiryType: InquiryType;
-		subject: string;
-		message: string;
-	}>({ name: "", email: "", inquiryType: "", subject: "", message: "" });
+	let formData = $state<ContactRequest>({
+		name: "",
+		email: "",
+		inquiryType: "",
+		subject: "",
+		message: "",
+		cfToken: "",
+	});
 
 	let errors = $state<Record<string, string>>({});
 	let isSubmitting = $state<boolean>(false);
@@ -108,15 +83,40 @@
 	}
 
 	async function handleSubmit(e: Event) {
+		const cloudflareToken = "cf-turnstile-response";
 		e.preventDefault();
+
+		const form = new FormData(e.currentTarget);
 
 		if (!validateForm()) {
 			return;
 		}
 
+		const cfToken = form.get(cloudflareToken);
+		if (typeof cfToken !== "string") {
+			console.log("Expected CfToken to be a string");
+			return;
+		}
+
 		isSubmitting = true;
 
-		await new Promise((resolve) => setTimeout(resolve, 1500));
+		try {
+			const contactUrl = import.meta.env.VITE_CONTACT_URL;
+			if (!contactUrl) {
+				submitStatus = "error";
+				return;
+			}
+			const response = await fetch(import.meta.env.VITE_CONTACT_URL, {
+				method: "POST",
+				body: JSON.stringify(formData),
+			});
+			if (!response || response.status !== 200) {
+				submitStatus = "error";
+				return;
+			}
+		} catch (error) {
+			submitStatus = "error";
+		}
 
 		submitStatus = "success";
 		isSubmitting = false;
@@ -128,6 +128,7 @@
 				inquiryType: "",
 				subject: "",
 				message: "",
+				cfToken: cfToken,
 			};
 			submitStatus = "idle";
 		}, 3000);
@@ -208,6 +209,7 @@
 
 				<form onsubmit={handleSubmit} novalidate class="flex flex-col gap-6">
 					<div
+						hidden
 						class="cf-turnstile"
 						data-sitekey="0x4AAAAAAB8Kyhx16DqpPvEy"
 					></div>
@@ -222,6 +224,7 @@
 						<input
 							type="text"
 							id="name"
+							name="name"
 							autocapitalize="on"
 							bind:value={formData.name}
 							oninput={() => clearError("name")}
@@ -245,6 +248,7 @@
 						<input
 							type="email"
 							id="email"
+							name="email"
 							bind:value={formData.email}
 							oninput={() => clearError("email")}
 							autocomplete="email"
@@ -267,17 +271,18 @@
 						</label>
 						<select
 							id="inquiryType"
+							name="inquiryType"
 							bind:value={formData.inquiryType}
 							oninput={() => clearError("inquiryType")}
 							class="w-full px-4 py-3 bg-bg-dark border border-border-default placeholder:text-bright/40
 					rounded text-default focus:outline-none focus:border-cyan-500 transition-colors
 					{errors.inquiryType ? 'border-red-500' : ''}"
 						>
-							<option value="" disabled selected hidden class="text-default/40"
+							<option value="" hidden class="text-default/40"
 								>Select an Inquiry Type</option
 							>
 							{#each inquiries as inquiry}
-								<option value={inquiry.value}>{inquiry.label}</option>
+								<option value={inquiry}>{inquiry}</option>
 							{/each}
 						</select>
 						{#if errors.inquiryType}
@@ -295,6 +300,7 @@
 						<input
 							type="text"
 							id="subject"
+							name="subject"
 							bind:value={formData.subject}
 							oninput={() => clearError("subject")}
 							placeholder={getRandomSubjectPlaceholder()}
@@ -316,6 +322,7 @@
 						</label>
 						<textarea
 							id="message"
+							name="message"
 							bind:value={formData.message}
 							oninput={() => clearError("message")}
 							rows="8"
@@ -366,6 +373,11 @@
 						{/if}
 					</div>
 				</form>
+				<script
+					src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+					async
+					defer
+				></script>
 			</section>
 
 			<!-- Sidebar -->
