@@ -5,5 +5,12 @@
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
+	},
+	"env": {
+		"production": {
+			"vars": {
+				"VITE_CONTACT_URL": "https://api.danielvm.dev/contact"
+			}
+		}
 	}
 }
