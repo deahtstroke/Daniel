@@ -102,7 +102,9 @@
 		try {
 			isSubmitting = true;
 			formData.cfToken = cfToken;
-			const contactUrl = import.meta.env.VITE_CONTACT_URL;
+			const contactUrl = import.meta.env.PROD
+				? "https://api.danielvm.dev/contact"
+				: "http://localhost:3000/contact";
 			if (!contactUrl) {
 				submitStatus = "error";
 				throw new Error("The email API url is not set");
